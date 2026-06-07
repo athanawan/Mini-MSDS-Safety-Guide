@@ -5,7 +5,7 @@
 
 ---
 
-## 📌 Deskripsi
+## Deskripsi
 
 **ChemAssist Lab** adalah platform web interaktif berbasis Python (Streamlit) yang menyediakan:
 - 📋 **Mini MSDS** — Informasi lengkap 74 bahan kimia lab (sifat fisik, GHS, LGK)
@@ -16,7 +16,7 @@
 
 ---
 
-## 🚀 Cara Deploy ke Streamlit Cloud
+## Cara Deploy ke Streamlit Cloud
 
 ### 1. Siapkan Repository GitHub
 ```
@@ -64,7 +64,7 @@ git push -u origin main
 
 ## 🛠️ Teknologi
 
-- **Python 3.10+**
+- **Python 3.14.3+**
 - **Streamlit** — Web framework
 - **JSON** — Database bahan kimia
 
