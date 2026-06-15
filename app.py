@@ -265,6 +265,20 @@ def pasang_css():
             --card-border: rgba(148,163,184,0.18);
         }
     }
+    /* Streamlit's manual theme toggle sets data-theme on html/body,
+       which can differ from the OS prefers-color-scheme. Honor it explicitly. */
+    html[data-theme="dark"], body[data-theme="dark"], .stApp[data-theme="dark"] {
+        --text-strong: #f1f5f9;
+        --text-soft: rgba(241,245,249,0.75);
+        --card-bg: rgba(30,41,59,0.55);
+        --card-border: rgba(148,163,184,0.18);
+    }
+    html[data-theme="light"], body[data-theme="light"], .stApp[data-theme="light"] {
+        --text-strong: #1e293b;
+        --text-soft: rgba(30,41,59,0.75);
+        --card-bg: rgba(255,255,255,0.72);
+        --card-border: rgba(15,76,117,0.15);
+    }
 
     /* ===== ELEGANT LAB-THEMED BACKGROUND ===== */
     [data-testid="stAppViewContainer"] {
@@ -284,6 +298,26 @@ def pasang_css():
                 linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #111827 100%);
             background-attachment: fixed;
         }
+    }
+    html[data-theme="dark"] [data-testid="stAppViewContainer"],
+    body[data-theme="dark"] [data-testid="stAppViewContainer"],
+    .stApp[data-theme="dark"] [data-testid="stAppViewContainer"] {
+        background:
+            radial-gradient(circle at 15% 20%, rgba(56,189,248,0.07) 0%, transparent 45%),
+            radial-gradient(circle at 85% 10%, rgba(168,85,247,0.06) 0%, transparent 40%),
+            radial-gradient(circle at 50% 90%, rgba(34,197,94,0.05) 0%, transparent 45%),
+            linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #111827 100%);
+        background-attachment: fixed;
+    }
+    html[data-theme="light"] [data-testid="stAppViewContainer"],
+    body[data-theme="light"] [data-testid="stAppViewContainer"],
+    .stApp[data-theme="light"] [data-testid="stAppViewContainer"] {
+        background:
+            radial-gradient(circle at 15% 20%, rgba(15,76,117,0.10) 0%, transparent 45%),
+            radial-gradient(circle at 85% 10%, rgba(123,45,139,0.08) 0%, transparent 40%),
+            radial-gradient(circle at 50% 90%, rgba(22,163,74,0.06) 0%, transparent 45%),
+            linear-gradient(135deg, #f8fafc 0%, #eef2f7 50%, #f5f7fb 100%);
+        background-attachment: fixed;
     }
     [data-testid="stHeader"] { background: transparent !important; }
 
@@ -361,7 +395,7 @@ def pasang_css():
 
     /* ===== ADAPTIVE TEXT COLORS ===== */
     /* Force readable text on colored backgrounds */
-    .safe-text-dark  { color: #1e293b !important; }
+    .safe-text-dark  { color: var(--text-strong) !important; }
     .safe-text-light { color: #f1f5f9 !important; }
 
     /* Hero stat cards adaptive */
@@ -569,7 +603,7 @@ def tampil_sidebar():
             label_visibility="collapsed"
         )
         st.divider()
-        st.markdown('<p style="font-size:0.72rem;color:#64748b!important;">Politeknik AKA Bogor<br>Analisis Kimia · Kel. 2</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:0.72rem;color:var(--text-soft)!important;">Politeknik AKA Bogor<br>Analisis Kimia · Kel. 2</p>', unsafe_allow_html=True)
     return pilihan
 
 def halaman_beranda():
@@ -666,7 +700,7 @@ def halaman_beranda():
             st.markdown(f"""<div style="background:{warna_bg};border-radius:14px;padding:16px;text-align:center;height:160px;border:1px solid rgba(0,0,0,0.08);">
               <div style="font-size:2rem;">{ikon}</div>
               <strong style="font-size:0.9rem;color:{warna_teks};">{judul}</strong>
-              <p style="font-size:0.78rem;color:#334155;margin-top:6px;">{deskripsi}</p>
+              <p style="font-size:0.78rem;color:var(--text-soft);margin-top:6px;">{deskripsi}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -748,13 +782,13 @@ def halaman_msds():
     with kol_ki:
         for label, nilai, warna_bg in properti_kiri:
             st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.06);">
-              <span style="font-size:0.78rem;color:#4b5563;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
-              <p style="margin:3px 0 0;font-weight:600;color:#1e293b;">{nilai}</p></div>""", unsafe_allow_html=True)
+              <span style="font-size:0.78rem;color:var(--text-soft);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
+              <p style="margin:3px 0 0;font-weight:600;color:var(--text-strong);">{nilai}</p></div>""", unsafe_allow_html=True)
     with kol_ka:
         for label, nilai, warna_bg in properti_kanan:
             st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.06);">
-              <span style="font-size:0.78rem;color:#4b5563;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
-              <p style="margin:3px 0 0;font-weight:600;color:#1e293b;">{nilai}</p></div>""", unsafe_allow_html=True)
+              <span style="font-size:0.78rem;color:var(--text-soft);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
+              <p style="margin:3px 0 0;font-weight:600;color:var(--text-strong);">{nilai}</p></div>""", unsafe_allow_html=True)
 
     st.markdown(f"""<div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:12px;padding:14px 18px;margin:10px 0;">
       <span style="font-size:0.78rem;color:#be123c;font-weight:700;text-transform:uppercase;">⚠️ Sifat Bahaya</span>
@@ -770,7 +804,7 @@ def halaman_msds():
                             border-radius:14px;padding:16px;text-align:center;height:130px;">
               <div style="font-size:2rem;">{info['emoji']}</div>
               <strong style="color:{info['color']};font-size:0.88rem;">{info['label']}</strong>
-              <p style="font-size:0.76rem;color:#374151;margin:4px 0 0;">{info['desc']}</p>
+              <p style="font-size:0.76rem;color:var(--text-soft);margin:4px 0 0;">{info['desc']}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -827,7 +861,7 @@ def halaman_tumpahan():
                       font-size:0.82rem;flex-shrink:0;">{nomor}</div>
           <div>
             <strong style="color:{warna};font-size:0.88rem;text-transform:uppercase;letter-spacing:0.5px;">{judul}</strong>
-            <p style="margin:4px 0 0;font-size:0.88rem;color:#1e293b;">{isi}</p>
+            <p style="margin:4px 0 0;font-size:0.88rem;color:var(--text-strong);">{isi}</p>
           </div>
         </div>""", unsafe_allow_html=True)
 
@@ -881,7 +915,7 @@ def halaman_p3k():
         with tab:
             st.markdown(f"""<div style="background:{warna_bg};border:1px solid {warna}30;border-radius:14px;padding:18px 20px;margin:8px 0;">
               <h4 style="color:{warna};margin:0 0 8px;">{ikon} {judul}</h4>
-              <p style="margin:0;font-size:0.9rem;color:#1e293b;line-height:1.7;">{konten}</p>
+              <p style="margin:0;font-size:0.9rem;color:var(--text-strong);line-height:1.7;">{konten}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown(f"""
@@ -905,7 +939,7 @@ def halaman_p3k():
             st.markdown(f"""<div style="background:{warna_bg};border-radius:12px;padding:14px;text-align:center;border:1px solid {warna}25;height:140px;">
               <div style="font-size:1.8rem;">{ikon}</div>
               <strong style="color:{warna};font-size:0.85rem;">{judul}</strong>
-              <p style="font-size:0.77rem;color:#374151;margin-top:6px;line-height:1.4;">{tips}</p>
+              <p style="font-size:0.77rem;color:var(--text-soft);margin-top:6px;line-height:1.4;">{tips}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -951,7 +985,7 @@ def halaman_kuis():
             with kolom_kat[i % len(kolom_kat)]:
                 st.markdown(f"""<div style="text-align:center;padding:12px;background:#f3e8ff;border-radius:10px;margin:4px 0;border:1px solid #ddd6fe;">
                   <strong style="color:#7c3aed;font-size:0.85rem;">{kat}</strong>
-                  <p style="margin:2px 0;font-size:0.8rem;color:#4b5563;">{jml} soal</p></div>""", unsafe_allow_html=True)
+                  <p style="margin:2px 0;font-size:0.8rem;color:var(--text-soft);">{jml} soal</p></div>""", unsafe_allow_html=True)
 
         if st.button("▶️ Mulai Kuis", type="primary", use_container_width=True):
             st.session_state.kuis_mulai   = True
@@ -979,7 +1013,7 @@ def halaman_kuis():
           <div style="font-size:3rem;">{pesan.split()[0]}</div>
           <h2 style="color:{warna_hasil};margin:8px 0;">{pesan[2:]}</h2>
           <p style="font-size:3rem;font-weight:800;color:{warna_hasil};margin:8px 0;">{nilai_akhir}/{total_soal}</p>
-          <p style="color:#64748b;">Skor: {persentase:.0f}%</p>
+          <p style="color:var(--text-soft);">Skor: {persentase:.0f}%</p>
         </div>""", unsafe_allow_html=True)
         if st.button("🔄 Ulangi Kuis", use_container_width=True):
             st.session_state.kuis_mulai   = False
@@ -1041,7 +1075,7 @@ def halaman_kuis():
     if sudah_jawab:
         st.markdown(f"""<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px 18px;margin:10px 0;">
           <strong style="color:#15803d;">💡 Penjelasan:</strong>
-          <p style="margin:4px 0 0;color:#1e293b;font-size:0.88rem;">{soal['explanation']}</p>
+          <p style="margin:4px 0 0;color:var(--text-strong);font-size:0.88rem;">{soal['explanation']}</p>
         </div>""", unsafe_allow_html=True)
 
         if no_sekarang + 1 < len(soal_aktif):
@@ -1091,7 +1125,7 @@ def halaman_tentang():
                       font-size:1.1rem;flex-shrink:0;">{huruf}</div>
           <div>
             <strong style="color:{warna};font-size:0.95rem;">{nama}</strong>
-            <p style="margin:3px 0 0;font-size:0.82rem;color:#374151;">🎓 Program Studi {prodi}</p>
+            <p style="margin:3px 0 0;font-size:0.82rem;color:var(--text-soft);">🎓 Program Studi {prodi}</p>
           </div>
         </div>""", unsafe_allow_html=True)
 
