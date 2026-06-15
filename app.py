@@ -250,46 +250,22 @@ def pasang_css():
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* ===== PERBAIKAN: ADAPTIVE COLOR MENGGUNAKAN TEMA STREAMLIT ===== */
-    /* Menghubungkan warna langsung dengan toggle mode Terang/Gelap Streamlit */
+    /* ===== ADAPTIVE COLOR VARIABLES (Light/Dark Safe) ===== */
     :root {
-        --text-strong: var(--text-color);
-        --text-soft: var(--text-color);
-        --card-bg: var(--secondary-background-color);
-        --card-border: var(--border-color, rgba(128,128,128,0.2));
+        --bg-card: var(--secondary-background-color, white);
+        --border-card: var(--border-color, #e2e8f0);
+        --text-main: var(--text-color, #1e293b);
+        --text-muted: var(--text-color, #64748b);
     }
-
-    /* ===== ELEGANT LAB-THEMED BACKGROUND ===== */
-    [data-testid="stAppViewContainer"] {
-        /* Gunakan background Streamlit sebagai dasar agar auto-berubah */
-        background-color: var(--background-color);
-        /* Gradient tipis untuk kesan elegan (transparan agar aman di mode apapun) */
-        background-image:
-            radial-gradient(circle at 15% 20%, rgba(15,76,117,0.05) 0%, transparent 45%),
-            radial-gradient(circle at 85% 10%, rgba(123,45,139,0.05) 0%, transparent 40%),
-            radial-gradient(circle at 50% 90%, rgba(22,163,74,0.05) 0%, transparent 45%);
-        background-attachment: fixed;
-    }
-    
-    [data-testid="stHeader"] { background: transparent !important; }
 
     /* Memaksa teks utama terbaca di semua mode */
     .main, .main p, .main li, .main span:not([style*="color"]) {
-        color: var(--text-color);
+        color: var(--text-main);
     }
 
-    /* ===== KARTU / CARDS AGAR ADAPTIF ===== */
-    .chem-card, .prop-card, .step-block, .p3k-box, .quiz-box, .member-card,
-    .guide-step, .benefit-row, .feature-card, .hero-stat {
-        background: var(--card-bg) !important;
-        backdrop-filter: blur(6px);
-        border-color: var(--card-border) !important;
-    }
-
-    /* ===== SIDEBAR ===== */
     [data-testid="stSidebar"] {
         background: var(--secondary-background-color) !important;
-        border-right: 1px solid var(--card-border);
+        border-right: 1px solid var(--border-card);
     }
     [data-testid="stSidebar"] * { color: var(--text-color) !important; }
     [data-testid="stSidebar"] .stRadio label {
@@ -299,61 +275,89 @@ def pasang_css():
 
     .main .block-container { padding-top: 1.5rem; max-width: 1100px; }
 
-    /* ===== DETAIL KARTU ===== */
-    .prop-card { padding: 12px 16px; border-radius: 10px; margin: 6px 0; border: 1px solid var(--card-border); }
-    .prop-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; opacity: 0.7; color: var(--text-color); }
-    .prop-value { margin: 3px 0 0; font-weight: 600; color: var(--text-color); }
-
-    .chem-card { border-radius: 14px; padding: 20px; border: 1px solid var(--card-border); box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 12px; }
-
-    .sidebar-logo { font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--text-color) !important; padding: 4px 0; }
-    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--text-color); }
-    hr { border: none; border-top: 1px solid var(--card-border); margin: 16px 0; }
-    .stButton > button { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
-
-    /* ===== HERO STATS (YANG HILANG DI SCREENSHOT) ===== */
-    .hero-stat { text-align: center; padding: 18px; border-radius: 14px; border: 1px solid var(--card-border); }
-    .hero-stat .stat-num { font-size: 2rem; font-weight: 800; }
-    .hero-stat .stat-label { font-size: 0.8rem; margin-top: 4px; opacity: 0.8; color: var(--text-color) !important; }
-
-    /* OVERRIDE: Menimpa warna hardcode dari inline-HTML python agar adaptif */
-    .chem-card p, .chem-card strong, .chem-card span,
-    .benefit-row p, .benefit-row strong,
-    .guide-step p, .guide-step strong {
-        color: var(--text-color) !important;
+    .chem-card {
+        background: var(--bg-card);
+        border-radius: 14px;
+        padding: 20px;
+        border: 1px solid var(--border-card);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        margin-bottom: 12px;
+        color: var(--text-main);
     }
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 14px 0;
+    }
+    .info-chip {
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 0.88rem;
+        font-weight: 500;
+    }
+    .ghs-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        margin: 4px;
+    }
+    .step-card {
+        border-left: 4px solid #3b82f6;
+        background: rgba(59, 130, 246, 0.1); /* Transparan agar aman di dark mode */
+        padding: 10px 16px;
+        border-radius: 0 10px 10px 0;
+        margin: 8px 0;
+        font-size: 0.9rem;
+    }
+    .p3k-tab {
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin: 8px 0;
+        font-size: 0.88rem;
+        border: 1px solid var(--border-card);
+    }
+    .hero-stat {
+        text-align: center;
+        padding: 18px;
+        border-radius: 14px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-card);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .quiz-option {
+        cursor: pointer;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 2px solid var(--border-card);
+        margin: 6px 0;
+        font-size: 0.9rem;
+        background: var(--bg-card);
+        color: var(--text-main);
+    }
+    .sidebar-logo {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-color) !important;
+        padding: 4px 0;
+    }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--text-main); }
 
-    /* Tumpahan step */
-    .step-block { border-radius: 12px; padding: 14px 18px; margin: 8px 0; display: flex; align-items: flex-start; gap: 12px; border: 1px solid var(--card-border); }
-    .step-num { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.82rem; flex-shrink: 0; color: white; }
-    .step-title { font-size: 0.88rem; text-transform: uppercase; font-weight: 700; margin: 0 0 4px; color: var(--text-color) !important; }
-    .step-content { font-size: 0.88rem; margin: 0; line-height: 1.6; color: var(--text-color) !important; }
+    hr { border: none; border-top: 1px solid var(--border-card); margin: 16px 0; }
 
-    /* P3K */
-    .p3k-box { border-radius: 14px; padding: 18px 20px; margin: 8px 0; border: 1px solid var(--card-border); }
-    .p3k-box h4 { margin: 0 0 8px; color: var(--text-color); }
-    .p3k-box p  { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text-color); }
-
-    .feature-card { border-radius: 14px; padding: 16px; text-align: center; height: 160px; border: 1px solid var(--card-border); }
-    .quiz-box { border-radius: 16px; padding: 24px; margin-bottom: 14px; border: 1px solid var(--card-border); }
-    .quiz-q { margin: 0; font-size: 1.05rem; line-height: 1.5; font-weight: 600; color: var(--text-color); }
-    .member-card { border-radius: 14px; padding: 16px 20px; margin: 8px 0; display: flex; align-items: center; gap: 16px; border: 1px solid var(--card-border); }
-    .member-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; flex-shrink: 0; color: white; }
-    .guide-step { display: flex; align-items: flex-start; gap: 14px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--card-border); margin: 6px 0; }
-    .guide-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; color: white; }
-    .benefit-row { border-radius: 10px; padding: 10px 14px; margin: 6px 0; display: flex; align-items: center; gap: 10px; border: 1px solid var(--card-border); }
-
-    /* Banner Tetap Punya Warna Khusus */
-    .banner-warning { background: rgba(254, 226, 226, 0.2); border: 1px solid #fecaca; border-radius: 12px; padding: 14px 18px; font-size: 0.85rem; color: #ef4444 !important; }
-    .banner-info { background: rgba(239, 246, 255, 0.2); border: 1px solid #bfdbfe; border-radius: 12px; padding: 14px 18px; font-size: 0.85rem; color: #3b82f6 !important; }
-    .banner-note { background: rgba(255, 251, 235, 0.2); border: 1px solid #fde68a; border-radius: 12px; padding: 14px 18px; color: #f59e0b !important; }
+    [data-testid="metric-container"] { background: var(--bg-card); border-radius: 12px; padding: 12px; border: 1px solid var(--border-card); }
     </style>
     """, unsafe_allow_html=True)
 
 def tampil_sidebar():
     with st.sidebar:
         st.markdown('<div class="sidebar-logo">📋 Mini MSDS & Safety Guide</div>', unsafe_allow_html=True)
-        st.markdown('<p style="font-size:0.75rem;color:#94a3b8!important;margin-top:2px;">v3.0 · Sistem Informasi Kimia</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:0.75rem;color:var(--text-color)!important;margin-top:2px;opacity:0.7;">v3.0 · Sistem Informasi Kimia</p>', unsafe_allow_html=True)
         st.divider()
         pilihan = st.radio(
             "📌 Navigasi",
@@ -361,7 +365,7 @@ def tampil_sidebar():
             label_visibility="collapsed"
         )
         st.divider()
-        st.markdown('<p style="font-size:0.72rem;color:var(--text-soft)!important;">Politeknik AKA Bogor<br>Analisis Kimia · Kel. 2</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:0.72rem;color:var(--text-color)!important;opacity:0.7;">Politeknik AKA Bogor<br>Analisis Kimia · Kel. 2</p>', unsafe_allow_html=True)
     return pilihan
 
 def halaman_beranda():
@@ -373,7 +377,7 @@ def halaman_beranda():
                   background:rgba(255,255,255,0.05);border-radius:50%;"></div>
       <div style="position:absolute;bottom:-60px;left:60%;width:150px;height:150px;
                   background:rgba(255,255,255,0.04);border-radius:50%;"></div>
-      <p style="font-size:0.85rem;letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin:0 0 8px;color:white;">
+      <p style="font-size:0.85rem;letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin:0 0 8px;">
         📋 Platform Informasi Kimia Lab
       </p>
       <h1 style="font-size:2.6rem;font-weight:800;margin:0 0 10px;line-height:1.2;color:white;">
@@ -383,10 +387,10 @@ def halaman_beranda():
         Sistem informasi keselamatan bahan kimia yang cepat, lengkap, dan interaktif untuk laboratorium analitik modern.
       </p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);color:white;">📊 Mini MSDS</span>
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);color:white;">🚨 Pengendalian Tumpahan</span>
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);color:white;">🩺 Pertolongan Pertama</span>
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);color:white;">🧠 Kuis Interaktif</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">📊 Mini MSDS</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🚨 Pengendalian Tumpahan</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🩺 Pertolongan Pertama</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🧠 Kuis Interaktif</span>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -397,17 +401,22 @@ def halaman_beranda():
     jml_korosif = sum(1 for b in daftar_bahan if "korosif" in b["sifat"].lower())
 
     k1, k2, k3, k4 = st.columns(4)
-    stats = [
-        (k1, str(jml_bahan),  "#1e3a5f", "🧫 Bahan Kimia"),
-        (k2, str(jml_ghs),   "#e85d04", "⚠️ Simbol GHS"),
-        (k3, str(jml_korosif),"#d62828", "🧪 Bahan Korosif"),
-        (k4, str(jml_soal),  "#7b2d8b", "🧠 Soal Kuis"),
-    ]
-    for kol, angka, warna, label in stats:
-        with kol:
-            st.markdown(f"""<div class="hero-stat">
-              <div class="stat-num" style="color:{warna};">{angka}</div>
-              <div class="stat-label">{label}</div></div>""", unsafe_allow_html=True)
+    with k1:
+        st.markdown(f"""<div class="hero-stat">
+          <div style="font-size:2rem;font-weight:800;color:var(--text-main);">{jml_bahan}</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">🧫 Bahan Kimia</div></div>""", unsafe_allow_html=True)
+    with k2:
+        st.markdown(f"""<div class="hero-stat">
+          <div style="font-size:2rem;font-weight:800;color:#e85d04;">{jml_ghs}</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">⚠️ Simbol GHS</div></div>""", unsafe_allow_html=True)
+    with k3:
+        st.markdown(f"""<div class="hero-stat">
+          <div style="font-size:2rem;font-weight:800;color:#d62828;">{jml_korosif}</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">🧪 Bahan Korosif</div></div>""", unsafe_allow_html=True)
+    with k4:
+        st.markdown(f"""<div class="hero-stat">
+          <div style="font-size:2rem;font-weight:800;color:#7b2d8b;">{jml_soal}</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">🧠 Soal Kuis</div></div>""", unsafe_allow_html=True)
 
     st.markdown("---")
 
@@ -422,43 +431,43 @@ def halaman_beranda():
             st.markdown(f"""<div class="chem-card" style="padding:14px 18px;">
               <div style="display:flex;align-items:flex-start;gap:12px;">
                 <span style="font-size:1.5rem;">{ikon}</span>
-                <div><strong>{judul}</strong>
-                <p style="margin:4px 0 0;font-size:0.85rem;opacity:0.75;">{isi}</p></div>
+                <div><strong style="color:var(--text-main);">{judul}</strong>
+                <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-muted);">{isi}</p></div>
               </div></div>""", unsafe_allow_html=True)
 
     with kol_kanan:
         st.markdown("### 🌟 Manfaat Platform")
-        for ikon, judul, isi in [
-            ("⚡", "Akses Cepat",        "Cari info lengkap bahan kimia dalam hitungan detik tanpa membuka buku tebal."),
-            ("🛡️", "Keselamatan Lab",    "Prosedur P3K dan pengendalian tumpahan yang detail membantu respons darurat yang tepat."),
-            ("📊", "Data Komprehensif",  "74 bahan kimia lab lengkap dengan sifat fisik, klasifikasi LGK, dan simbol GHS."),
-            ("🧠", "Belajar Interaktif", "Kuis berbasis konten membantu memahami sifat dan bahaya bahan kimia dengan cara menyenangkan."),
+        for ikon, judul, warna_bg, isi in [
+            ("⚡", "Akses Cepat",        "rgba(29, 78, 216, 0.1)", "Cari info lengkap bahan kimia dalam hitungan detik tanpa membuka buku tebal."),
+            ("🛡️", "Keselamatan Lab",    "rgba(21, 128, 61, 0.1)", "Prosedur P3K dan pengendalian tumpahan yang detail membantu respons darurat yang tepat."),
+            ("📊", "Data Komprehensif",  "rgba(217, 119, 6, 0.1)", "74 bahan kimia lab lengkap dengan sifat fisik, klasifikasi LGK, dan simbol GHS."),
+            ("🧠", "Belajar Interaktif", "rgba(124, 58, 237, 0.1)", "Kuis berbasis konten membantu memahami sifat dan bahaya bahan kimia dengan cara menyenangkan."),
         ]:
-            st.markdown(f"""<div class="benefit-row">
+            st.markdown(f"""<div style="background:{warna_bg};border-radius:10px;padding:10px 14px;margin:6px 0;display:flex;align-items:center;gap:10px;">
               <span style="font-size:1.3rem;">{ikon}</span>
-              <div><strong style="font-size:0.88rem;">{judul}</strong>
-              <p style="margin:2px 0 0;font-size:0.82rem;opacity:0.7;">{isi}</p></div></div>""", unsafe_allow_html=True)
+              <div><strong style="font-size:0.88rem;color:var(--text-main);">{judul}</strong>
+              <p style="margin:2px 0 0;font-size:0.82rem;color:var(--text-muted);">{isi}</p></div></div>""", unsafe_allow_html=True)
 
     st.markdown("---")
 
     st.markdown("### 🔍 Preview Fitur Utama")
     f1, f2, f3, f4 = st.columns(4)
     daftar_fitur = [
-        ("📋", "Mini MSDS",             "#dbeafe", "#1d4ed8",
+        ("📋", "Mini MSDS",             "rgba(29, 78, 216, 0.1)", "var(--text-main)",
          "Database 74 bahan kimia lengkap dengan rumus, sifat fisik, wujud, warna, bau & simbol GHS."),
-        ("🚨", "Pengendalian Tumpahan", "#fee2e2", "#dc2626",
+        ("🚨", "Pengendalian Tumpahan", "rgba(220, 38, 38, 0.1)", "var(--text-main)",
          "Prosedur langkah demi langkah penanganan tumpahan bahan kimia berbahaya."),
-        ("⛑️", "Pertolongan Pertama",   "#d1fae5", "#059669",
+        ("⛑️", "Pertolongan Pertama",   "rgba(5, 150, 105, 0.1)", "var(--text-main)",
          "Panduan P3K detail per jalur paparan: kulit, mata, terhirup, dan tertelan."),
-        ("🧠", "Kuis Interaktif",       "#f3e8ff", "#7c3aed",
+        ("🧠", "Kuis Interaktif",       "rgba(124, 58, 237, 0.1)", "var(--text-main)",
          f"{len(DAFTAR_SOAL)} soal pilihan ganda seputar sifat, bahaya, APD, dan prosedur kimia lab."),
     ]
     for kolom, (ikon, judul, warna_bg, warna_teks, deskripsi) in zip([f1, f2, f3, f4], daftar_fitur):
         with kolom:
-            st.markdown(f"""<div style="background:{warna_bg};border-radius:14px;padding:16px;text-align:center;height:160px;border:1px solid rgba(0,0,0,0.08);">
+            st.markdown(f"""<div style="background:{warna_bg};border-radius:14px;padding:16px;text-align:center;height:160px;border: 1px solid var(--border-card);">
               <div style="font-size:2rem;">{ikon}</div>
               <strong style="font-size:0.9rem;color:{warna_teks};">{judul}</strong>
-              <p style="font-size:0.78rem;color:var(--text-soft);margin-top:6px;">{deskripsi}</p>
+              <p style="font-size:0.78rem;color:var(--text-muted);margin-top:6px;">{deskripsi}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -472,17 +481,20 @@ def halaman_beranda():
         ("5", "🧠 Kuis Kimia",            "Uji pemahaman kamu tentang keselamatan kimia lab melalui 15 soal interaktif yang beragam.", "#7c3aed"),
     ]
     for nomor, judul, isi, warna in langkah_panduan:
-        st.markdown(f"""<div class="guide-step">
-          <div class="guide-num" style="background:{warna};">{nomor}</div>
-          <div><strong>{judul}</strong>
-          <p style="margin:2px 0 0;font-size:0.84rem;opacity:0.7;">{isi}</p></div>
+        st.markdown(f"""<div style="display:flex;align-items:flex-start;gap:14px;padding:12px 16px;
+                        border-radius:12px;border:1px solid var(--border-card);background:var(--bg-card);margin:6px 0;">
+          <div style="background:{warna};color:white;width:28px;height:28px;border-radius:50%;
+                      display:flex;align-items:center;justify-content:center;font-weight:700;
+                      font-size:0.85rem;flex-shrink:0;">{nomor}</div>
+          <div><strong style="color:var(--text-main);">{judul}</strong>
+          <p style="margin:2px 0 0;font-size:0.84rem;color:var(--text-muted);">{isi}</p></div>
         </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("""
     <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:16px;
                 padding:24px 28px;color:white;text-align:center;margin-top:10px;">
-      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">📋 <strong>Mini MSDS & Safety Guide</strong></p>
+      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">📋 <strong>Mini MSDS & Safety Guide v3.0</strong></p>
       <p style="font-size:0.82rem;opacity:0.8;margin:0;color:white;line-height:1.6;">
         Website ini dikembangkan sebagai proyek Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         untuk membantu akses informasi keselamatan bahan kimia secara cepat, praktis, dan interaktif.<br>
@@ -490,7 +502,6 @@ def halaman_beranda():
       </p>
     </div>
     """, unsafe_allow_html=True)
-
 
 def halaman_msds():
     st.markdown("## 📋 Sistem Informasi Bahan Kimia — Mini MSDS")
@@ -540,13 +551,13 @@ def halaman_msds():
     with kol_ki:
         for label, nilai, warna_bg in properti_kiri:
             st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.06);">
-              <span style="font-size:0.78rem;color:var(--text-soft);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
-              <p style="margin:3px 0 0;font-weight:600;color:var(--text-strong);">{nilai}</p></div>""", unsafe_allow_html=True)
+              <span style="font-size:0.78rem;color:#4b5563;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
+              <p style="margin:3px 0 0;font-weight:600;color:#1e293b;">{nilai}</p></div>""", unsafe_allow_html=True)
     with kol_ka:
         for label, nilai, warna_bg in properti_kanan:
             st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.06);">
-              <span style="font-size:0.78rem;color:var(--text-soft);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
-              <p style="margin:3px 0 0;font-weight:600;color:var(--text-strong);">{nilai}</p></div>""", unsafe_allow_html=True)
+              <span style="font-size:0.78rem;color:#4b5563;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
+              <p style="margin:3px 0 0;font-weight:600;color:#1e293b;">{nilai}</p></div>""", unsafe_allow_html=True)
 
     st.markdown(f"""<div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:12px;padding:14px 18px;margin:10px 0;">
       <span style="font-size:0.78rem;color:#be123c;font-weight:700;text-transform:uppercase;">⚠️ Sifat Bahaya</span>
@@ -562,7 +573,7 @@ def halaman_msds():
                             border-radius:14px;padding:16px;text-align:center;height:130px;">
               <div style="font-size:2rem;">{info['emoji']}</div>
               <strong style="color:{info['color']};font-size:0.88rem;">{info['label']}</strong>
-              <p style="font-size:0.76rem;color:var(--text-soft);margin:4px 0 0;">{info['desc']}</p>
+              <p style="font-size:0.76rem;color:#374151;margin:4px 0 0;">{info['desc']}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -578,7 +589,7 @@ def halaman_tumpahan():
     st.markdown("Panduan penanganan darurat tumpahan bahan kimia langkah demi langkah berdasarkan jenis bahaya.")
 
     pilihan_dropdown = [f"{b['nama_senyawa']}  ({b['rumus_kimia']})" for b in daftar_bahan]
-    label_terpilih  = st.selectbox("📋 Pilih Bahan Kimia yang Terlibat Insiden:", pilihan_dropdown)
+    label_terpilih  = st.selectbox("⚗️ Pilih Bahan Kimia yang Terlibat Insiden:", pilihan_dropdown)
     nama_terpilih   = label_terpilih.split("  (")[0]
     bahan           = next(b for b in daftar_bahan if b["nama_senyawa"] == nama_terpilih)
 
@@ -619,7 +630,7 @@ def halaman_tumpahan():
                       font-size:0.82rem;flex-shrink:0;">{nomor}</div>
           <div>
             <strong style="color:{warna};font-size:0.88rem;text-transform:uppercase;letter-spacing:0.5px;">{judul}</strong>
-            <p style="margin:4px 0 0;font-size:0.88rem;color:var(--text-strong);">{isi}</p>
+            <p style="margin:4px 0 0;font-size:0.88rem;color:#1e293b;">{isi}</p>
           </div>
         </div>""", unsafe_allow_html=True)
 
@@ -632,11 +643,11 @@ def halaman_tumpahan():
 
 
 def halaman_p3k():
-    st.markdown("## ⛑️ Pertolongan Pertama (P3K) Paparan Bahan Kimia")
+    st.markdown("## 🩺 Pertolongan Pertama (P3K) Paparan Bahan Kimia")
     st.markdown("Panduan tindakan pertolongan pertama berdasarkan jalur paparan bahan kimia: kulit, mata, terhirup, dan tertelan.")
 
     pilihan_dropdown = [f"{b['nama_senyawa']}  ({b['rumus_kimia']})" for b in daftar_bahan]
-    label_terpilih  = st.selectbox("📋 Pilih Bahan Kimia yang Memapar:", pilihan_dropdown)
+    label_terpilih  = st.selectbox("⚗️ Pilih Bahan Kimia yang Memapar:", pilihan_dropdown)
     nama_terpilih   = label_terpilih.split("  (")[0]
     bahan           = next(b for b in daftar_bahan if b["nama_senyawa"] == nama_terpilih)
 
@@ -647,7 +658,7 @@ def halaman_p3k():
     st.markdown(f"""
     <div style="background:linear-gradient(135deg,{wc}22,{wc}0a);border-left:5px solid {wc};
                 border-radius:0 14px 14px 0;padding:16px 20px;margin:12px 0;">
-      <h3 style="margin:0;color:{wc};">⛑️ P3K: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
+      <h3 style="margin:0;color:{wc};">🩺 P3K: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
       <p style="margin:4px 0 0;font-size:0.88rem;opacity:0.8;">Sifat Bahaya: <strong style="color:{wc};">{bahan['sifat']}</strong></p>
     </div>""", unsafe_allow_html=True)
 
@@ -657,7 +668,7 @@ def halaman_p3k():
     )
     st.markdown(f"<div style='margin:8px 0;'>{html_badge}</div>", unsafe_allow_html=True)
 
-    st.markdown("### ⛑️ Tindakan P3K per Jalur Paparan")
+    st.markdown("### 🩺 Tindakan P3K per Jalur Paparan")
     st.markdown("Pilih tab sesuai jalur paparan yang terjadi:")
 
     data_p3k = buat_panduan_p3k(bahan["nama_senyawa"], bahan["sifat"], bahan["pertolongan_pertama"])
@@ -673,7 +684,7 @@ def halaman_p3k():
         with tab:
             st.markdown(f"""<div style="background:{warna_bg};border:1px solid {warna}30;border-radius:14px;padding:18px 20px;margin:8px 0;">
               <h4 style="color:{warna};margin:0 0 8px;">{ikon} {judul}</h4>
-              <p style="margin:0;font-size:0.9rem;color:var(--text-strong);line-height:1.7;">{konten}</p>
+              <p style="margin:0;font-size:0.9rem;color:#1e293b;line-height:1.7;">{konten}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown(f"""
@@ -697,7 +708,7 @@ def halaman_p3k():
             st.markdown(f"""<div style="background:{warna_bg};border-radius:12px;padding:14px;text-align:center;border:1px solid {warna}25;height:140px;">
               <div style="font-size:1.8rem;">{ikon}</div>
               <strong style="color:{warna};font-size:0.85rem;">{judul}</strong>
-              <p style="font-size:0.77rem;color:var(--text-soft);margin-top:6px;line-height:1.4;">{tips}</p>
+              <p style="font-size:0.77rem;color:#374151;margin-top:6px;line-height:1.4;">{tips}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -743,7 +754,7 @@ def halaman_kuis():
             with kolom_kat[i % len(kolom_kat)]:
                 st.markdown(f"""<div style="text-align:center;padding:12px;background:#f3e8ff;border-radius:10px;margin:4px 0;border:1px solid #ddd6fe;">
                   <strong style="color:#7c3aed;font-size:0.85rem;">{kat}</strong>
-                  <p style="margin:2px 0;font-size:0.8rem;color:var(--text-soft);">{jml} soal</p></div>""", unsafe_allow_html=True)
+                  <p style="margin:2px 0;font-size:0.8rem;color:#4b5563;">{jml} soal</p></div>""", unsafe_allow_html=True)
 
         if st.button("▶️ Mulai Kuis", type="primary", use_container_width=True):
             st.session_state.kuis_mulai   = True
@@ -771,7 +782,7 @@ def halaman_kuis():
           <div style="font-size:3rem;">{pesan.split()[0]}</div>
           <h2 style="color:{warna_hasil};margin:8px 0;">{pesan[2:]}</h2>
           <p style="font-size:3rem;font-weight:800;color:{warna_hasil};margin:8px 0;">{nilai_akhir}/{total_soal}</p>
-          <p style="color:var(--text-soft);">Skor: {persentase:.0f}%</p>
+          <p style="color:#64748b;">Skor: {persentase:.0f}%</p>
         </div>""", unsafe_allow_html=True)
         if st.button("🔄 Ulangi Kuis", use_container_width=True):
             st.session_state.kuis_mulai   = False
@@ -833,7 +844,7 @@ def halaman_kuis():
     if sudah_jawab:
         st.markdown(f"""<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px 18px;margin:10px 0;">
           <strong style="color:#15803d;">💡 Penjelasan:</strong>
-          <p style="margin:4px 0 0;color:var(--text-strong);font-size:0.88rem;">{soal['explanation']}</p>
+          <p style="margin:4px 0 0;color:#1e293b;font-size:0.88rem;">{soal['explanation']}</p>
         </div>""", unsafe_allow_html=True)
 
         if no_sekarang + 1 < len(soal_aktif):
@@ -853,7 +864,7 @@ def halaman_tentang():
 
     st.markdown("""
     <div style="background:linear-gradient(135deg,#1e3a5f,#0f4c75);color:white;border-radius:18px;padding:28px 32px;margin-bottom:24px;">
-      <h3 style="color:white;margin:0 0 8px;">📋 Mini MSDS & Safety Guide</h3>
+      <h3 style="color:white;margin:0 0 8px;">⚗️ Mini MSDS & Safety Guide</h3>
       <p style="opacity:0.9;margin:0 0 12px;color:white;">
         Proyek ini dikembangkan sebagai tugas akhir Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         oleh mahasiswa Program Studi Analisis Kimia, Politeknik AKA Bogor.
@@ -871,7 +882,7 @@ def halaman_tentang():
         ("A", "ATHA MAHARDIKA NAWAN",            "Analisis Kimia", "#1d4ed8", "#dbeafe"),
         ("M", "MANAHEL ARIELLA PERTA",           "Analisis Kimia", "#7c3aed", "#f3e8ff"),
         ("N", "NAILA PUTRI ZAHRA",               "Analisis Kimia", "#0891b2", "#e0f2fe"),
-        ("S", "SALWAA SAFAANAH",                  "Analisis Kimia", "#16a34a", "#dcfce7"),
+        ("S", "SALWA SAFAANAH",                  "Analisis Kimia", "#16a34a", "#dcfce7"),
     ]
 
     for huruf, nama, prodi, warna, warna_bg in anggota_tim:
@@ -883,7 +894,7 @@ def halaman_tentang():
                       font-size:1.1rem;flex-shrink:0;">{huruf}</div>
           <div>
             <strong style="color:{warna};font-size:0.95rem;">{nama}</strong>
-            <p style="margin:3px 0 0;font-size:0.82rem;color:var(--text-soft);">🎓 Program Studi {prodi}</p>
+            <p style="margin:3px 0 0;font-size:0.82rem;color:#374151;">🎓 Program Studi {prodi}</p>
           </div>
         </div>""", unsafe_allow_html=True)
 
@@ -913,7 +924,7 @@ def halaman_tentang():
     st.markdown("""
     <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:16px;
                 padding:22px 28px;color:white;text-align:center;">
-      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">📋 <strong>Mini MSDS & Safety Guide v3.0</strong></p>
+      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">⚗️ <strong>Mini MSDS & Safety Guide v3.0</strong></p>
       <p style="font-size:0.82rem;opacity:0.8;margin:0;color:white;line-height:1.7;">
         Website ini dikembangkan sebagai proyek Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         untuk membantu akses informasi keselamatan bahan kimia secara cepat, praktis, dan interaktif.<br>
