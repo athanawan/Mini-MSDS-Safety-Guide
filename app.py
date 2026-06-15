@@ -4,7 +4,7 @@ import random
 
 st.set_page_config(
     page_title=" MSDS Mini | Sistem Informasi Bahan Kimia",
-    page_icon="⚗️",
+    page_icon="📋",
     layout="wide",
     initial_sidebar_state="expanded",
 )
