@@ -38,21 +38,21 @@ def cari_simbol_ghs(sifat_bahan: str) -> list:
     return list(dict.fromkeys(hasil))
 
 TABEL_GHS = {
-    "corrosive":    {"emoji": "🧪", "label": "Korosif",           "color": "#e85d04", "bg": "#fff3e0",
+    "corrosive":    {"emoji": "🧪", "label": "Korosif",           "color": "#e85d04", "bg": "rgba(232,93,4,0.15)",
                      "desc": "Dapat merusak/membakar jaringan kulit, mata, dan saluran pernapasan."},
-    "toxic":        {"emoji": "☠️", "label": "Toksik/Beracun",    "color": "#7b2d8b", "bg": "#f3e5f5",
+    "toxic":        {"emoji": "☠️", "label": "Toksik/Beracun",    "color": "#7b2d8b", "bg": "rgba(123,45,139,0.15)",
                      "desc": "Berbahaya atau mematikan jika tertelan, terhirup, atau terserap kulit."},
-    "flammable":    {"emoji": "🔥", "label": "Mudah Terbakar",    "color": "#d62828", "bg": "#fce4e4",
+    "flammable":    {"emoji": "🔥", "label": "Mudah Terbakar",    "color": "#d62828", "bg": "rgba(214,40,40,0.12)",
                      "desc": "Dapat dengan mudah terbakar; jauhkan dari sumber panas dan api terbuka."},
-    "oxidizing":    {"emoji": "🔶", "label": "Oksidator",         "color": "#e07b00", "bg": "#fff8e1",
+    "oxidizing":    {"emoji": "🔶", "label": "Oksidator",         "color": "#e07b00", "bg": "rgba(224,123,0,0.12)",
                      "desc": "Dapat menyebabkan atau memperparah kebakaran dengan menghasilkan oksigen."},
-    "environmental":{"emoji": "🌍", "label": "Bahaya Lingkungan", "color": "#2e7d32", "bg": "#e8f5e9",
+    "environmental":{"emoji": "🌍", "label": "Bahaya Lingkungan", "color": "#2e7d32", "bg": "rgba(46,125,50,0.15)",
                      "desc": "Berbahaya bagi organisme akuatik dan ekosistem perairan."},
-    "irritant":     {"emoji": "⚠️", "label": "Iritasi",           "color": "#f0a500", "bg": "#fffde7",
+    "irritant":     {"emoji": "⚠️", "label": "Iritasi",           "color": "#f0a500", "bg": "rgba(240,165,0,0.12)",
                      "desc": "Dapat menyebabkan iritasi pada kulit, mata, atau saluran pernapasan."},
-    "health_hazard":{"emoji": "💀", "label": "Bahaya Kesehatan",  "color": "#880e4f", "bg": "#fce4ec",
+    "health_hazard":{"emoji": "💀", "label": "Bahaya Kesehatan",  "color": "#880e4f", "bg": "rgba(136,14,79,0.15)",
                      "desc": "Dapat menyebabkan efek jangka panjang: karsinogenik, mutagenik, atau reprotoksik."},
-    "safe":         {"emoji": "✅", "label": "Relatif Aman",       "color": "#1b5e20", "bg": "#e8f5e9",
+    "safe":         {"emoji": "✅", "label": "Relatif Aman",       "color": "#1b5e20", "bg": "rgba(27,94,32,0.15)",
                      "desc": "Risiko bahaya relatif rendah dalam kondisi pemakaian normal."},
 }
 
@@ -254,15 +254,59 @@ def pasang_css():
     :root {
         --text-strong: #1e293b;
         --text-soft: rgba(30,41,59,0.75);
+        --text-muted: #4b5563;
+        --text-label: #4b5563;
         --card-bg: rgba(255,255,255,0.72);
         --card-border: rgba(15,76,117,0.15);
+        --prop-bg-blue: #dbeafe;
+        --prop-bg-green: #d1fae5;
+        --prop-bg-yellow: #fef3c7;
+        --prop-bg-purple: #f3e8ff;
+        --prop-bg-red: #fee2e2;
+        --prop-bg-orange: #fff7ed;
+        --prop-text: #1e293b;
+        --p3k-text: #1e293b;
+        --step-text: #1e293b;
+        --ghs-desc-text: #374151;
+        --feature-desc-text: #334155;
+        --info-bg: #eff6ff;
+        --info-border: #bfdbfe;
+        --info-text: #1e293b;
+        --quiz-explain-bg: #f0fdf4;
+        --quiz-explain-border: #bbf7d0;
+        --quiz-explain-text: #1e293b;
+        --banner-note-bg: #fffbeb;
+        --banner-note-border: #fde68a;
+        --banner-note-text: #78350f;
     }
     @media (prefers-color-scheme: dark) {
         :root {
             --text-strong: #f1f5f9;
             --text-soft: rgba(241,245,249,0.75);
+            --text-muted: #cbd5e1;
+            --text-label: #94a3b8;
             --card-bg: rgba(30,41,59,0.55);
             --card-border: rgba(148,163,184,0.18);
+            --prop-bg-blue: rgba(30,64,175,0.25);
+            --prop-bg-green: rgba(6,78,59,0.25);
+            --prop-bg-yellow: rgba(120,83,0,0.25);
+            --prop-bg-purple: rgba(88,28,135,0.25);
+            --prop-bg-red: rgba(153,27,27,0.25);
+            --prop-bg-orange: rgba(124,45,18,0.25);
+            --prop-text: #f1f5f9;
+            --p3k-text: #f1f5f9;
+            --step-text: #f1f5f9;
+            --ghs-desc-text: #cbd5e1;
+            --feature-desc-text: #cbd5e1;
+            --info-bg: rgba(30,58,138,0.2);
+            --info-border: rgba(59,130,246,0.3);
+            --info-text: #bfdbfe;
+            --quiz-explain-bg: rgba(6,78,59,0.2);
+            --quiz-explain-border: rgba(34,197,94,0.3);
+            --quiz-explain-text: #f1f5f9;
+            --banner-note-bg: rgba(120,83,0,0.2);
+            --banner-note-border: rgba(251,191,36,0.3);
+            --banner-note-text: #fde68a;
         }
     }
 
@@ -446,6 +490,14 @@ def pasang_css():
         border: 1px solid #fecaca;
     }
     .banner-warning * { color: #7f1d1d !important; }
+    @media (prefers-color-scheme: dark) {
+        .banner-warning {
+            background: rgba(153,27,27,0.25) !important;
+            border-color: rgba(239,68,68,0.35) !important;
+            color: #fca5a5 !important;
+        }
+        .banner-warning * { color: #fca5a5 !important; }
+    }
     .banner-info {
         background: #eff6ff;
         border-radius: 12px;
@@ -455,6 +507,14 @@ def pasang_css():
         border: 1px solid #bfdbfe;
     }
     .banner-info * { color: #1e3a8a !important; }
+    @media (prefers-color-scheme: dark) {
+        .banner-info {
+            background: rgba(30,58,138,0.25) !important;
+            border-color: rgba(96,165,250,0.35) !important;
+            color: #bfdbfe !important;
+        }
+        .banner-info * { color: #bfdbfe !important; }
+    }
     .banner-note {
         background: #fffbeb;
         border: 1px solid #fde68a;
@@ -463,6 +523,14 @@ def pasang_css():
         color: #78350f !important;
     }
     .banner-note * { color: #78350f !important; }
+    @media (prefers-color-scheme: dark) {
+        .banner-note {
+            background: rgba(120,83,0,0.25) !important;
+            border-color: rgba(251,191,36,0.35) !important;
+            color: #fde68a !important;
+        }
+        .banner-note * { color: #fde68a !important; }
+    }
 
     /* GHS badge */
     .ghs-card {
@@ -555,6 +623,57 @@ def pasang_css():
         border: 1px solid rgba(128,128,128,0.12);
     }
 
+    /* ===== STREAMLIT DARK MODE COMPATIBILITY ===== */
+    /* Streamlit uses [data-theme="dark"] attribute on the root */
+    [data-theme="dark"] {
+        --text-strong: #f1f5f9;
+        --text-soft: rgba(241,245,249,0.75);
+        --text-muted: #cbd5e1;
+        --text-label: #94a3b8;
+        --card-bg: rgba(30,41,59,0.55);
+        --card-border: rgba(148,163,184,0.18);
+        --prop-text: #f1f5f9;
+        --p3k-text: #f1f5f9;
+        --step-text: #f1f5f9;
+        --ghs-desc-text: #cbd5e1;
+        --feature-desc-text: #cbd5e1;
+        --info-bg: rgba(30,58,138,0.2);
+        --info-border: rgba(59,130,246,0.3);
+        --info-text: #bfdbfe;
+        --quiz-explain-bg: rgba(6,78,59,0.2);
+        --quiz-explain-border: rgba(34,197,94,0.3);
+        --quiz-explain-text: #f1f5f9;
+        --banner-note-bg: rgba(120,83,0,0.2);
+        --banner-note-border: rgba(251,191,36,0.3);
+        --banner-note-text: #fde68a;
+    }
+    [data-theme="dark"] .banner-warning {
+        background: rgba(153,27,27,0.25) !important;
+        border-color: rgba(239,68,68,0.35) !important;
+        color: #fca5a5 !important;
+    }
+    [data-theme="dark"] .banner-warning * { color: #fca5a5 !important; }
+    [data-theme="dark"] .banner-info {
+        background: rgba(30,58,138,0.25) !important;
+        border-color: rgba(96,165,250,0.35) !important;
+        color: #bfdbfe !important;
+    }
+    [data-theme="dark"] .banner-info * { color: #bfdbfe !important; }
+    [data-theme="dark"] .banner-note {
+        background: rgba(120,83,0,0.25) !important;
+        border-color: rgba(251,191,36,0.35) !important;
+        color: #fde68a !important;
+    }
+    [data-theme="dark"] .banner-note * { color: #fde68a !important; }
+    [data-theme="dark"] [data-testid="stAppViewContainer"] {
+        background:
+            radial-gradient(circle at 15% 20%, rgba(56,189,248,0.07) 0%, transparent 45%),
+            radial-gradient(circle at 85% 10%, rgba(168,85,247,0.06) 0%, transparent 40%),
+            radial-gradient(circle at 50% 90%, rgba(34,197,94,0.05) 0%, transparent 45%),
+            linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #111827 100%);
+        background-attachment: fixed;
+    }
+
     </style>
     """, unsafe_allow_html=True)
 
@@ -569,7 +688,7 @@ def tampil_sidebar():
             label_visibility="collapsed"
         )
         st.divider()
-        st.markdown('<p style="font-size:0.72rem;color:#64748b!important;">Politeknik AKA Bogor<br>Analisis Kimia · Kel. 2</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:0.72rem;color:#94a3b8!important;">Politeknik AKA Bogor<br>Analisis Kimia · Kel. 2</p>', unsafe_allow_html=True)
     return pilihan
 
 def halaman_beranda():
@@ -652,21 +771,21 @@ def halaman_beranda():
     st.markdown("### 🔍 Preview Fitur Utama")
     f1, f2, f3, f4 = st.columns(4)
     daftar_fitur = [
-        ("📋", "Mini MSDS",             "#dbeafe", "#1d4ed8",
+        ("📋", "Mini MSDS",             "rgba(29,78,216,0.12)", "#1d4ed8",
          "Database 74 bahan kimia lengkap dengan rumus, sifat fisik, wujud, warna, bau & simbol GHS."),
-        ("🚨", "Pengendalian Tumpahan", "#fee2e2", "#dc2626",
+        ("🚨", "Pengendalian Tumpahan", "rgba(220,38,38,0.12)", "#dc2626",
          "Prosedur langkah demi langkah penanganan tumpahan bahan kimia berbahaya."),
-        ("⛑️", "Pertolongan Pertama",   "#d1fae5", "#059669",
+        ("⛑️", "Pertolongan Pertama",   "rgba(5,150,105,0.12)", "#059669",
          "Panduan P3K detail per jalur paparan: kulit, mata, terhirup, dan tertelan."),
-        ("🧠", "Kuis Interaktif",       "#f3e8ff", "#7c3aed",
+        ("🧠", "Kuis Interaktif",       "rgba(124,58,237,0.12)", "#7c3aed",
          f"{len(DAFTAR_SOAL)} soal pilihan ganda seputar sifat, bahaya, APD, dan prosedur kimia lab."),
     ]
     for kolom, (ikon, judul, warna_bg, warna_teks, deskripsi) in zip([f1, f2, f3, f4], daftar_fitur):
         with kolom:
-            st.markdown(f"""<div style="background:{warna_bg};border-radius:14px;padding:16px;text-align:center;height:160px;border:1px solid rgba(0,0,0,0.08);">
+            st.markdown(f"""<div style="background:{warna_bg};border-radius:14px;padding:16px;text-align:center;height:160px;border:1px solid {warna_teks}30;">
               <div style="font-size:2rem;">{ikon}</div>
               <strong style="font-size:0.9rem;color:{warna_teks};">{judul}</strong>
-              <p style="font-size:0.78rem;color:#334155;margin-top:6px;">{deskripsi}</p>
+              <p style="font-size:0.78rem;color:var(--feature-desc-text);margin-top:6px;">{deskripsi}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -736,27 +855,27 @@ def halaman_msds():
 
     kol_ki, kol_ka = st.columns(2)
     properti_kiri = [
-        ("🧪 Rumus Molekul", bahan["rumus_kimia"], "#dbeafe"),
-        ("🧱 Wujud",         bahan["wujud"],        "#d1fae5"),
-        ("🎨 Warna",         bahan["warna"],        "#fef3c7"),
+        ("🧪 Rumus Molekul", bahan["rumus_kimia"], "rgba(29,78,216,0.12)"),
+        ("🧱 Wujud",         bahan["wujud"],        "rgba(5,150,105,0.12)"),
+        ("🎨 Warna",         bahan["warna"],        "rgba(217,119,6,0.12)"),
     ]
     properti_kanan = [
-        ("👃 Bau",            bahan["bau"],             "#f3e8ff"),
-        ("🏷️ Kode LGK",      bahan["lgk"],             "#fee2e2"),
-        ("📦 Keterangan LGK", bahan["keterangan_lgk"], "#fff7ed"),
+        ("👃 Bau",            bahan["bau"],             "rgba(124,58,237,0.12)"),
+        ("🏷️ Kode LGK",      bahan["lgk"],             "rgba(220,38,38,0.12)"),
+        ("📦 Keterangan LGK", bahan["keterangan_lgk"], "rgba(234,88,12,0.12)"),
     ]
     with kol_ki:
         for label, nilai, warna_bg in properti_kiri:
             st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.06);">
-              <span style="font-size:0.78rem;color:#4b5563;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
-              <p style="margin:3px 0 0;font-weight:600;color:#1e293b;">{nilai}</p></div>""", unsafe_allow_html=True)
+              <span style="font-size:0.78rem;color:var(--text-label);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
+              <p style="margin:3px 0 0;font-weight:600;color:var(--prop-text);">{nilai}</p></div>""", unsafe_allow_html=True)
     with kol_ka:
         for label, nilai, warna_bg in properti_kanan:
             st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.06);">
-              <span style="font-size:0.78rem;color:#4b5563;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
-              <p style="margin:3px 0 0;font-weight:600;color:#1e293b;">{nilai}</p></div>""", unsafe_allow_html=True)
+              <span style="font-size:0.78rem;color:var(--text-label);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
+              <p style="margin:3px 0 0;font-weight:600;color:var(--prop-text);">{nilai}</p></div>""", unsafe_allow_html=True)
 
-    st.markdown(f"""<div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:12px;padding:14px 18px;margin:10px 0;">
+    st.markdown(f"""<div style="background:rgba(190,18,60,0.12);border:1px solid rgba(190,18,60,0.25);border-radius:12px;padding:14px 18px;margin:10px 0;">
       <span style="font-size:0.78rem;color:#be123c;font-weight:700;text-transform:uppercase;">⚠️ Sifat Bahaya</span>
       <p style="margin:6px 0 0;font-weight:700;color:#be123c;font-size:1rem;">{bahan['sifat']}</p>
     </div>""", unsafe_allow_html=True)
@@ -770,12 +889,12 @@ def halaman_msds():
                             border-radius:14px;padding:16px;text-align:center;height:130px;">
               <div style="font-size:2rem;">{info['emoji']}</div>
               <strong style="color:{info['color']};font-size:0.88rem;">{info['label']}</strong>
-              <p style="font-size:0.76rem;color:#374151;margin:4px 0 0;">{info['desc']}</p>
+              <p style="font-size:0.76rem;color:var(--ghs-desc-text);margin:4px 0 0;">{info['desc']}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("""
-    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:14px 18px;font-size:0.85rem;color:#1e3a8a;">
+    <div style="background:var(--info-bg);border:1px solid var(--info-border);border-radius:12px;padding:14px 18px;font-size:0.85rem;color:var(--info-text);">
       <strong>ℹ️ Catatan:</strong> Informasi ini bersifat ringkasan (Mini MSDS). Untuk data lengkap, selalu rujuk ke
       Material Safety Data Sheet (MSDS/SDS) resmi dari produsen atau sumber standar seperti OSHA, ChemIDplus, atau PubChem.
     </div>""", unsafe_allow_html=True)
@@ -811,11 +930,11 @@ def halaman_tumpahan():
     prosedur = buat_prosedur_tumpahan(bahan["nama_senyawa"], bahan["sifat"], bahan["pengendalian_tumpahan"])
 
     urutan_langkah = [
-        ("1", "🚧 EVAKUASI & ISOLASI",   prosedur["evakuasi"],                         "#fef3c7", "#d97706"),
-        ("2", "🦺 PAKAI APD",             "Gunakan: " + ", ".join(prosedur["apd"]),     "#dbeafe", "#2563eb"),
-        ("3", "🔒 KENDALIKAN PENYEBARAN", prosedur["isolasi"],                          "#f0fdf4", "#16a34a"),
-        ("4", "🧹 BERSIHKAN TUMPAHAN",    prosedur["bersihkan"],                        "#fff7ed", "#ea580c"),
-        ("5", "🗑️ PEMBUANGAN LIMBAH",    prosedur["buang"],                            "#fdf4ff", "#9333ea"),
+        ("1", "🚧 EVAKUASI & ISOLASI",   prosedur["evakuasi"],                         "rgba(217,119,6,0.12)",  "#d97706"),
+        ("2", "🦺 PAKAI APD",             "Gunakan: " + ", ".join(prosedur["apd"]),     "rgba(37,99,235,0.12)",  "#2563eb"),
+        ("3", "🔒 KENDALIKAN PENYEBARAN", prosedur["isolasi"],                          "rgba(22,163,74,0.12)",  "#16a34a"),
+        ("4", "🧹 BERSIHKAN TUMPAHAN",    prosedur["bersihkan"],                        "rgba(234,88,12,0.12)",  "#ea580c"),
+        ("5", "🗑️ PEMBUANGAN LIMBAH",    prosedur["buang"],                            "rgba(147,51,234,0.12)", "#9333ea"),
     ]
 
     for nomor, judul, isi, warna_bg, warna in urutan_langkah:
@@ -827,13 +946,13 @@ def halaman_tumpahan():
                       font-size:0.82rem;flex-shrink:0;">{nomor}</div>
           <div>
             <strong style="color:{warna};font-size:0.88rem;text-transform:uppercase;letter-spacing:0.5px;">{judul}</strong>
-            <p style="margin:4px 0 0;font-size:0.88rem;color:#1e293b;">{isi}</p>
+            <p style="margin:4px 0 0;font-size:0.88rem;color:var(--step-text);">{isi}</p>
           </div>
         </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("""
-    <div style="background:#fee2e2;border-radius:12px;padding:14px 18px;font-size:0.85rem;color:#7f1d1d;border:1px solid #fca5a5;">
+    <div class="banner-warning">
       <strong>🚑 PENTING:</strong> Untuk kasus serius, segera hubungi IGD / Nomor Darurat <strong>119</strong> atau Poliklinik kampus.
       Bawa kartu data keselamatan (SDS) bahan kimia kepada petugas medis.
     </div>""", unsafe_allow_html=True)
@@ -871,21 +990,21 @@ def halaman_p3k():
     data_p3k = buat_panduan_p3k(bahan["nama_senyawa"], bahan["sifat"], bahan["pertolongan_pertama"])
     tab_p3k  = st.tabs(["🖐️ Kulit", "👁️ Mata", "😮‍💨 Terhirup", "🫀 Tertelan"])
     isi_tab  = [
-        ("🖐️", "Terpapar Kulit", data_p3k["kulit"],    "#dbeafe", "#1d4ed8"),
-        ("👁️", "Terpapar Mata",  data_p3k["mata"],     "#dcfce7", "#15803d"),
-        ("😮‍💨", "Terhirup",     data_p3k["terhirup"], "#fef9c3", "#a16207"),
-        ("🫀", "Tertelan",       data_p3k["tertelan"], "#ffe4e6", "#be123c"),
+        ("🖐️", "Terpapar Kulit", data_p3k["kulit"],    "rgba(29,78,216,0.12)",  "#1d4ed8"),
+        ("👁️", "Terpapar Mata",  data_p3k["mata"],     "rgba(21,128,61,0.12)",  "#15803d"),
+        ("😮‍💨", "Terhirup",     data_p3k["terhirup"], "rgba(161,98,7,0.12)",   "#a16207"),
+        ("🫀", "Tertelan",       data_p3k["tertelan"], "rgba(190,18,60,0.12)",  "#be123c"),
     ]
 
     for tab, (ikon, judul, konten, warna_bg, warna) in zip(tab_p3k, isi_tab):
         with tab:
             st.markdown(f"""<div style="background:{warna_bg};border:1px solid {warna}30;border-radius:14px;padding:18px 20px;margin:8px 0;">
               <h4 style="color:{warna};margin:0 0 8px;">{ikon} {judul}</h4>
-              <p style="margin:0;font-size:0.9rem;color:#1e293b;line-height:1.7;">{konten}</p>
+              <p style="margin:0;font-size:0.9rem;color:var(--p3k-text);line-height:1.7;">{konten}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown(f"""
-    <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 18px;margin-top:10px;color:#78350f;">
+    <div class="banner-note">
       <strong>📌 Catatan Umum:</strong> {data_p3k["catatan"]}
     </div>""", unsafe_allow_html=True)
 
@@ -895,22 +1014,22 @@ def halaman_p3k():
     st.markdown("### 📋 Panduan Cepat Jalur Paparan")
     c1, c2, c3, c4 = st.columns(4)
     panduan_cepat = [
-        (c1, "🖐️", "KULIT",    "#dbeafe", "#1d4ed8", "Bilas air mengalir ≥15 menit. Lepas pakaian terkontaminasi."),
-        (c2, "👁️", "MATA",     "#dcfce7", "#15803d", "Bilas air mengalir ≥15 menit, buka kelopak lebar-lebar."),
-        (c3, "😮‍💨", "TERHIRUP","#fef9c3", "#a16207", "Pindahkan ke udara segar. Longgarkan pakaian. Hubungi medis."),
-        (c4, "🫀", "TERTELAN", "#ffe4e6", "#be123c", "JANGAN paksa muntah. Segera ke IGD dengan info bahan."),
+        (c1, "🖐️", "KULIT",    "rgba(29,78,216,0.12)",  "#1d4ed8", "Bilas air mengalir ≥15 menit. Lepas pakaian terkontaminasi."),
+        (c2, "👁️", "MATA",     "rgba(21,128,61,0.12)",  "#15803d", "Bilas air mengalir ≥15 menit, buka kelopak lebar-lebar."),
+        (c3, "😮‍💨", "TERHIRUP","rgba(161,98,7,0.12)",   "#a16207", "Pindahkan ke udara segar. Longgarkan pakaian. Hubungi medis."),
+        (c4, "🫀", "TERTELAN", "rgba(190,18,60,0.12)",  "#be123c", "JANGAN paksa muntah. Segera ke IGD dengan info bahan."),
     ]
     for kol, ikon, judul, warna_bg, warna, tips in panduan_cepat:
         with kol:
             st.markdown(f"""<div style="background:{warna_bg};border-radius:12px;padding:14px;text-align:center;border:1px solid {warna}25;height:140px;">
               <div style="font-size:1.8rem;">{ikon}</div>
               <strong style="color:{warna};font-size:0.85rem;">{judul}</strong>
-              <p style="font-size:0.77rem;color:#374151;margin-top:6px;line-height:1.4;">{tips}</p>
+              <p style="font-size:0.77rem;color:var(--ghs-desc-text);margin-top:6px;line-height:1.4;">{tips}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("""
-    <div style="background:#fee2e2;border-radius:12px;padding:14px 18px;font-size:0.85rem;color:#7f1d1d;border:1px solid #fca5a5;">
+    <div class="banner-warning">
       <strong>🚑 PENTING:</strong> Informasi ini adalah panduan pertolongan pertama. Untuk kasus serius,
       segera hubungi IGD / Nomor Darurat <strong>119</strong> atau Poliklinik kampus. Bawa kartu data keselamatan (SDS)
       bahan kimia kepada petugas medis.
@@ -951,7 +1070,7 @@ def halaman_kuis():
             with kolom_kat[i % len(kolom_kat)]:
                 st.markdown(f"""<div style="text-align:center;padding:12px;background:#f3e8ff;border-radius:10px;margin:4px 0;border:1px solid #ddd6fe;">
                   <strong style="color:#7c3aed;font-size:0.85rem;">{kat}</strong>
-                  <p style="margin:2px 0;font-size:0.8rem;color:#4b5563;">{jml} soal</p></div>""", unsafe_allow_html=True)
+                  <p style="margin:2px 0;font-size:0.8rem;color:var(--text-muted);">{jml} soal</p></div>""", unsafe_allow_html=True)
 
         if st.button("▶️ Mulai Kuis", type="primary", use_container_width=True):
             st.session_state.kuis_mulai   = True
@@ -979,7 +1098,7 @@ def halaman_kuis():
           <div style="font-size:3rem;">{pesan.split()[0]}</div>
           <h2 style="color:{warna_hasil};margin:8px 0;">{pesan[2:]}</h2>
           <p style="font-size:3rem;font-weight:800;color:{warna_hasil};margin:8px 0;">{nilai_akhir}/{total_soal}</p>
-          <p style="color:#64748b;">Skor: {persentase:.0f}%</p>
+          <p style="color:var(--text-muted);">Skor: {persentase:.0f}%</p>
         </div>""", unsafe_allow_html=True)
         if st.button("🔄 Ulangi Kuis", use_container_width=True):
             st.session_state.kuis_mulai   = False
@@ -1018,13 +1137,13 @@ def halaman_kuis():
     for i, opsi in enumerate(soal["options"]):
         if sudah_jawab:
             if i == soal["answer"]:
-                bg, border, warna_teks = "#dcfce7", "#16a34a", "#15803d"
+                bg, border, warna_teks = "rgba(22,163,74,0.15)", "#16a34a", "#15803d"
                 awalan = "✅ "
             elif i == pilihan_user and pilihan_user != soal["answer"]:
-                bg, border, warna_teks = "#fee2e2", "#dc2626", "#dc2626"
+                bg, border, warna_teks = "rgba(220,38,38,0.15)", "#dc2626", "#dc2626"
                 awalan = "❌ "
             else:
-                bg, border, warna_teks = "rgba(128,128,128,0.08)", "rgba(128,128,128,0.25)", "#64748b"
+                bg, border, warna_teks = "rgba(128,128,128,0.08)", "rgba(128,128,128,0.25)", "var(--text-muted)"
                 awalan = ""
             tebal = "700" if i == soal["answer"] or i == pilihan_user else "400"
             st.markdown(f"""<div style="background:{bg};border:2px solid {border};border-radius:10px;
@@ -1039,9 +1158,9 @@ def halaman_kuis():
                 st.rerun()
 
     if sudah_jawab:
-        st.markdown(f"""<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px 18px;margin:10px 0;">
+        st.markdown(f"""<div style="background:var(--quiz-explain-bg);border:1px solid var(--quiz-explain-border);border-radius:12px;padding:14px 18px;margin:10px 0;">
           <strong style="color:#15803d;">💡 Penjelasan:</strong>
-          <p style="margin:4px 0 0;color:#1e293b;font-size:0.88rem;">{soal['explanation']}</p>
+          <p style="margin:4px 0 0;color:var(--quiz-explain-text);font-size:0.88rem;">{soal['explanation']}</p>
         </div>""", unsafe_allow_html=True)
 
         if no_sekarang + 1 < len(soal_aktif):
@@ -1075,11 +1194,11 @@ def halaman_tentang():
     st.markdown("### 👨‍🔬 Kelompok 2 — Anggota Tim")
 
     anggota_tim = [
-        ("A", "ACHDES 'AZILLA ZACHROTUL SYITA", "Analisis Kimia", "#e85d04", "#fff3e0"),
-        ("A", "ATHA MAHARDIKA NAWAN",            "Analisis Kimia", "#1d4ed8", "#dbeafe"),
-        ("M", "MANAHEL ARIELLA PERTA",           "Analisis Kimia", "#7c3aed", "#f3e8ff"),
-        ("N", "NAILA PUTRI ZAHRA",               "Analisis Kimia", "#0891b2", "#e0f2fe"),
-        ("S", "SALWAA SAFAANAH",                  "Analisis Kimia", "#16a34a", "#dcfce7"),
+        ("A", "ACHDES 'AZILLA ZACHROTUL SYITA", "Analisis Kimia", "#e85d04", "rgba(232,93,4,0.12)"),
+        ("A", "ATHA MAHARDIKA NAWAN",            "Analisis Kimia", "#1d4ed8", "rgba(29,78,216,0.12)"),
+        ("M", "MANAHEL ARIELLA PERTA",           "Analisis Kimia", "#7c3aed", "rgba(124,58,237,0.12)"),
+        ("N", "NAILA PUTRI ZAHRA",               "Analisis Kimia", "#0891b2", "rgba(8,145,178,0.12)"),
+        ("S", "SALWAA SAFAANAH",                  "Analisis Kimia", "#16a34a", "rgba(22,163,74,0.12)"),
     ]
 
     for huruf, nama, prodi, warna, warna_bg in anggota_tim:
@@ -1091,7 +1210,7 @@ def halaman_tentang():
                       font-size:1.1rem;flex-shrink:0;">{huruf}</div>
           <div>
             <strong style="color:{warna};font-size:0.95rem;">{nama}</strong>
-            <p style="margin:3px 0 0;font-size:0.82rem;color:#374151;">🎓 Program Studi {prodi}</p>
+            <p style="margin:3px 0 0;font-size:0.82rem;color:var(--ghs-desc-text);">🎓 Program Studi {prodi}</p>
           </div>
         </div>""", unsafe_allow_html=True)
 
