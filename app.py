@@ -565,7 +565,7 @@ def tampil_sidebar():
         st.divider()
         pilihan = st.radio(
             "📌 Navigasi",
-            options=["🏠 Beranda", "📋 Mini MSDS", "🚨 Pengendalian Tumpahan", "🩺 Pertolongan Pertama", "🧠 Kuis Kimia", "👥 Tentang Kami"],
+            options=["🏠 Beranda", "📋 Mini MSDS", "🚨 Pengendalian Tumpahan", "⛑️ Pertolongan Pertama", "🧠 Kuis Kimia", "👥 Tentang Kami"],
             label_visibility="collapsed"
         )
         st.divider()
@@ -676,7 +676,7 @@ def halaman_beranda():
         ("1", "🧭 Navigasi Sidebar",      "Pilih fitur yang diinginkan melalui menu di sebelah kiri layar.", "#1e3a5f"),
         ("2", "🔍 Mini MSDS",             "Pilih nama bahan kimia dari dropdown untuk melihat informasi lengkap, sifat bahaya, dan simbol GHS.", "#0f4c75"),
         ("3", "🚨 Pengendalian Tumpahan", "Pilih bahan kimia yang terlibat insiden untuk mendapatkan prosedur penanganan tumpahan yang detail.", "#dc2626"),
-        ("4", "🩺 Pertolongan Pertama",   "Pilih bahan kimia untuk mendapatkan panduan P3K detail berdasarkan jalur paparan.", "#059669"),
+        ("4", "⛑️ Pertolongan Pertama",   "Pilih bahan kimia untuk mendapatkan panduan P3K detail berdasarkan jalur paparan.", "#059669"),
         ("5", "🧠 Kuis Kimia",            "Uji pemahaman kamu tentang keselamatan kimia lab melalui 15 soal interaktif yang beragam.", "#7c3aed"),
     ]
     for nomor, judul, isi, warna in langkah_panduan:
@@ -786,7 +786,7 @@ def halaman_tumpahan():
     st.markdown("Panduan penanganan darurat tumpahan bahan kimia langkah demi langkah berdasarkan jenis bahaya.")
 
     pilihan_dropdown = [f"{b['nama_senyawa']}  ({b['rumus_kimia']})" for b in daftar_bahan]
-    label_terpilih  = st.selectbox("⚗️ Pilih Bahan Kimia yang Terlibat Insiden:", pilihan_dropdown)
+    label_terpilih  = st.selectbox("📋 Pilih Bahan Kimia yang Terlibat Insiden:", pilihan_dropdown)
     nama_terpilih   = label_terpilih.split("  (")[0]
     bahan           = next(b for b in daftar_bahan if b["nama_senyawa"] == nama_terpilih)
 
@@ -840,11 +840,11 @@ def halaman_tumpahan():
 
 
 def halaman_p3k():
-    st.markdown("## 🩺 Pertolongan Pertama (P3K) Paparan Bahan Kimia")
+    st.markdown("## ⛑️ Pertolongan Pertama (P3K) Paparan Bahan Kimia")
     st.markdown("Panduan tindakan pertolongan pertama berdasarkan jalur paparan bahan kimia: kulit, mata, terhirup, dan tertelan.")
 
     pilihan_dropdown = [f"{b['nama_senyawa']}  ({b['rumus_kimia']})" for b in daftar_bahan]
-    label_terpilih  = st.selectbox("⚗️ Pilih Bahan Kimia yang Memapar:", pilihan_dropdown)
+    label_terpilih  = st.selectbox("📋 Pilih Bahan Kimia yang Memapar:", pilihan_dropdown)
     nama_terpilih   = label_terpilih.split("  (")[0]
     bahan           = next(b for b in daftar_bahan if b["nama_senyawa"] == nama_terpilih)
 
@@ -855,7 +855,7 @@ def halaman_p3k():
     st.markdown(f"""
     <div style="background:linear-gradient(135deg,{wc}22,{wc}0a);border-left:5px solid {wc};
                 border-radius:0 14px 14px 0;padding:16px 20px;margin:12px 0;">
-      <h3 style="margin:0;color:{wc};">🩺 P3K: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
+      <h3 style="margin:0;color:{wc};">⛑️ P3K: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
       <p style="margin:4px 0 0;font-size:0.88rem;opacity:0.8;">Sifat Bahaya: <strong style="color:{wc};">{bahan['sifat']}</strong></p>
     </div>""", unsafe_allow_html=True)
 
@@ -865,7 +865,7 @@ def halaman_p3k():
     )
     st.markdown(f"<div style='margin:8px 0;'>{html_badge}</div>", unsafe_allow_html=True)
 
-    st.markdown("### 🩺 Tindakan P3K per Jalur Paparan")
+    st.markdown("### ⛑️ Tindakan P3K per Jalur Paparan")
     st.markdown("Pilih tab sesuai jalur paparan yang terjadi:")
 
     data_p3k = buat_panduan_p3k(bahan["nama_senyawa"], bahan["sifat"], bahan["pertolongan_pertama"])
