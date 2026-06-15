@@ -250,23 +250,27 @@ def pasang_css():
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* ===== ADAPTIVE COLOR VARIABLES (light/dark safe) ===== */
+    /* ===== CSS VARIABLES — Streamlit dark/light theme ===== */
+    /* Light mode defaults */
     :root {
-        --text-strong: #1e293b;
-        --text-soft: rgba(30,41,59,0.75);
-        --card-bg: rgba(255,255,255,0.72);
+        --tx: #1e293b;
+        --tx-soft: #4b5563;
+        --tx-muted: #64748b;
+        --card-bg: rgba(255,255,255,0.85);
         --card-border: rgba(15,76,117,0.15);
+        --card-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --text-strong: #f1f5f9;
-            --text-soft: rgba(241,245,249,0.75);
-            --card-bg: rgba(30,41,59,0.55);
-            --card-border: rgba(148,163,184,0.18);
-        }
+    /* Streamlit dark mode: uses [data-theme="dark"] on <html> */
+    [data-theme="dark"] {
+        --tx: #f1f5f9;
+        --tx-soft: #cbd5e1;
+        --tx-muted: #94a3b8;
+        --card-bg: rgba(30,41,59,0.7);
+        --card-border: rgba(148,163,184,0.18);
+        --card-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
-    /* ===== ELEGANT LAB-THEMED BACKGROUND ===== */
+    /* ===== BACKGROUND ===== */
     [data-testid="stAppViewContainer"] {
         background:
             radial-gradient(circle at 15% 20%, rgba(15,76,117,0.10) 0%, transparent 45%),
@@ -275,30 +279,78 @@ def pasang_css():
             linear-gradient(135deg, #f8fafc 0%, #eef2f7 50%, #f5f7fb 100%);
         background-attachment: fixed;
     }
-    @media (prefers-color-scheme: dark) {
-        [data-testid="stAppViewContainer"] {
-            background:
-                radial-gradient(circle at 15% 20%, rgba(56,189,248,0.07) 0%, transparent 45%),
-                radial-gradient(circle at 85% 10%, rgba(168,85,247,0.06) 0%, transparent 40%),
-                radial-gradient(circle at 50% 90%, rgba(34,197,94,0.05) 0%, transparent 45%),
-                linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #111827 100%);
-            background-attachment: fixed;
-        }
+    [data-theme="dark"] [data-testid="stAppViewContainer"] {
+        background:
+            radial-gradient(circle at 15% 20%, rgba(56,189,248,0.07) 0%, transparent 45%),
+            radial-gradient(circle at 85% 10%, rgba(168,85,247,0.06) 0%, transparent 40%),
+            radial-gradient(circle at 50% 90%, rgba(34,197,94,0.05) 0%, transparent 45%),
+            linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #111827 100%);
+        background-attachment: fixed;
     }
     [data-testid="stHeader"] { background: transparent !important; }
 
-    /* Force readable default text color across modes */
-    .main, .main p, .main li, .main span:not([style*="color"]) {
-        color: var(--text-strong);
+    /* ===== DEFAULT TEXT ===== */
+    .main p, .main li, .main span:not([style*="color"]), .main div:not([style*="color"]) {
+        color: var(--tx);
     }
 
-    /* Subtle elegant card backdrop so content stays readable on busy bg */
-    .chem-card, .prop-card, .step-block, .p3k-box, .quiz-box, .member-card,
-    .guide-step, .benefit-row, .feature-card, .hero-stat {
-        background: var(--card-bg) !important;
+    /* ===== BASE CARDS ===== */
+    .chem-card {
+        background: var(--card-bg);
         backdrop-filter: blur(6px);
-        border-color: var(--card-border) !important;
+        border-radius: 14px;
+        padding: 20px;
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        margin-bottom: 12px;
+        color: var(--tx);
     }
+    .chem-card h4, .chem-card p, .chem-card span { color: var(--tx); }
+
+    .hero-stat {
+        background: var(--card-bg);
+        backdrop-filter: blur(6px);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        text-align: center;
+        padding: 18px;
+        border-radius: 14px;
+    }
+    .hero-stat .stat-num { font-size: 2rem; font-weight: 800; }
+    .hero-stat .stat-label { font-size: 0.8rem; margin-top: 4px; color: var(--tx-muted); }
+
+    .guide-step {
+        background: var(--card-bg);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 1px solid var(--card-border);
+        margin: 6px 0;
+        color: var(--tx);
+    }
+    .guide-step p { color: var(--tx-soft) !important; margin: 2px 0 0; font-size: 0.84rem; }
+    .guide-num {
+        width: 28px; height: 28px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 700; font-size: 0.85rem; flex-shrink: 0; color: white;
+    }
+
+    .benefit-row {
+        background: var(--card-bg);
+        backdrop-filter: blur(6px);
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin: 6px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid var(--card-border);
+        color: var(--tx);
+    }
+    .benefit-row p { color: var(--tx-soft) !important; margin: 2px 0 0; font-size: 0.82rem; }
 
     /* ===== SIDEBAR ===== */
     [data-testid="stSidebar"] {
@@ -312,320 +364,67 @@ def pasang_css():
     }
 
     .main .block-container { padding-top: 1.5rem; max-width: 1100px; }
-
-    /* ===== DARK/LIGHT MODE ADAPTIVE CARDS ===== */
-    /* Info chips & property cards */
-    .prop-card {
-        padding: 12px 16px;
-        border-radius: 10px;
-        margin: 6px 0;
-        border: 1px solid rgba(128,128,128,0.2);
-    }
-    .prop-label {
-        font-size: 0.78rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        opacity: 0.65;
-    }
-    .prop-value {
-        margin: 3px 0 0;
-        font-weight: 600;
-    }
-
-    /* Generic card for light/dark compatibility */
-    .chem-card {
-        border-radius: 14px;
-        padding: 20px;
-        border: 1px solid rgba(128,128,128,0.2);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        margin-bottom: 12px;
-    }
-
     .sidebar-logo {
         font-family: 'Space Mono', monospace;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: white !important;
-        padding: 4px 0;
+        font-size: 1.1rem; font-weight: 700;
+        color: white !important; padding: 4px 0;
     }
     h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
-
     hr { border: none; border-top: 1px solid rgba(128,128,128,0.25); margin: 16px 0; }
 
-    /* ===== QUIZ BUTTONS ===== */
     .stButton > button {
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 600;
     }
 
-    /* ===== ADAPTIVE TEXT COLORS ===== */
-    /* Force readable text on colored backgrounds */
-    .safe-text-dark  { color: #1e293b !important; }
-    .safe-text-light { color: #f1f5f9 !important; }
-
-    /* Hero stat cards adaptive */
-    .hero-stat {
-        text-align: center;
-        padding: 18px;
-        border-radius: 14px;
+    /* ===== PROP CARD ===== */
+    .prop-card {
+        padding: 12px 16px; border-radius: 10px; margin: 6px 0;
         border: 1px solid rgba(128,128,128,0.2);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    .hero-stat .stat-num {
-        font-size: 2rem;
-        font-weight: 800;
-    }
-    .hero-stat .stat-label {
-        font-size: 0.8rem;
-        margin-top: 4px;
-        opacity: 0.7;
-    }
+    .prop-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.65; }
+    .prop-value { margin: 3px 0 0; font-weight: 600; }
 
-    /* Step cards for tumpahan */
+    /* ===== STEP BLOCK ===== */
     .step-block {
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin: 8px 0;
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
+        border-radius: 12px; padding: 14px 18px; margin: 8px 0;
+        display: flex; align-items: flex-start; gap: 12px;
         border: 1px solid rgba(128,128,128,0.15);
     }
     .step-num {
-        width: 30px;
-        height: 30px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 0.82rem;
-        flex-shrink: 0;
-        color: white;
+        width: 30px; height: 30px; border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 0.82rem; flex-shrink: 0; color: white;
     }
-    .step-title {
-        font-size: 0.88rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-weight: 700;
-        margin: 0 0 4px;
-    }
-    .step-content {
-        font-size: 0.88rem;
-        margin: 0;
-        line-height: 1.6;
-    }
+    .step-title { font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin: 0 0 4px; }
+    .step-content { font-size: 0.88rem; margin: 0; line-height: 1.6; }
 
-    /* P3K tab content */
+    /* ===== P3K BOX ===== */
     .p3k-box {
-        border-radius: 14px;
-        padding: 18px 20px;
-        margin: 8px 0;
+        border-radius: 14px; padding: 18px 20px; margin: 8px 0;
         border: 1px solid rgba(128,128,128,0.15);
     }
     .p3k-box h4 { margin: 0 0 8px; }
     .p3k-box p  { margin: 0; font-size: 0.9rem; line-height: 1.7; }
 
-    /* Feature preview cards */
-    .feature-card {
-        border-radius: 14px;
-        padding: 16px;
-        text-align: center;
-        height: 160px;
-        border: 1px solid rgba(128,128,128,0.15);
-    }
-
-    /* Warning / info banners always with strong contrast */
-    .banner-warning {
-        background: #fee2e2;
-        border-radius: 12px;
-        padding: 14px 18px;
-        font-size: 0.85rem;
-        color: #7f1d1d !important;
-        border: 1px solid #fecaca;
-    }
-    .banner-warning * { color: #7f1d1d !important; }
-    .banner-info {
-        background: #eff6ff;
-        border-radius: 12px;
-        padding: 14px 18px;
-        font-size: 0.85rem;
-        color: #1e3a8a !important;
-        border: 1px solid #bfdbfe;
-    }
-    .banner-info * { color: #1e3a8a !important; }
-    .banner-note {
-        background: #fffbeb;
-        border: 1px solid #fde68a;
-        border-radius: 12px;
-        padding: 14px 18px;
-        color: #78350f !important;
-    }
-    .banner-note * { color: #78350f !important; }
-
-    /* GHS badge */
-    .ghs-card {
-        border-radius: 14px;
-        padding: 16px;
-        text-align: center;
-        height: 130px;
-        border: 2px solid;
-    }
-
-    /* Danger badge strip */
-    .sifat-strip {
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin: 10px 0;
-        background: #fff1f2;
-        border: 1px solid #fecdd3;
-    }
-    .sifat-strip .label { font-size: 0.78rem; color: #be123c; font-weight: 700; text-transform: uppercase; }
-    .sifat-strip .value { margin: 6px 0 0; font-weight: 700; color: #be123c; font-size: 1rem; }
-
-    /* Quiz question box */
+    /* ===== QUIZ BOX ===== */
     .quiz-box {
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 14px;
+        border-radius: 16px; padding: 24px; margin-bottom: 14px;
         border: 1px solid rgba(128,128,128,0.2);
     }
-    .quiz-q {
-        margin: 0;
-        font-size: 1.05rem;
-        line-height: 1.5;
-        font-weight: 600;
-    }
+    .quiz-q { margin: 0; font-size: 1.05rem; line-height: 1.5; font-weight: 600; }
 
-    /* Member card */
+    /* ===== MEMBER CARD ===== */
     .member-card {
-        border-radius: 14px;
-        padding: 16px 20px;
-        margin: 8px 0;
-        display: flex;
-        align-items: center;
-        gap: 16px;
+        border-radius: 14px; padding: 16px 20px; margin: 8px 0;
+        display: flex; align-items: center; gap: 16px;
         border: 1px solid rgba(128,128,128,0.2);
     }
     .member-avatar {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 1.1rem;
-        flex-shrink: 0;
-        color: white;
+        width: 44px; height: 44px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 1.1rem; flex-shrink: 0; color: white;
     }
-
-    /* Guide step */
-    .guide-step {
-        display: flex;
-        align-items: flex-start;
-        gap: 14px;
-        padding: 12px 16px;
-        border-radius: 12px;
-        border: 1px solid rgba(128,128,128,0.2);
-        margin: 6px 0;
-    }
-    .guide-num {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 0.85rem;
-        flex-shrink: 0;
-        color: white;
-    }
-
-    /* Benefit row */
-    .benefit-row {
-        border-radius: 10px;
-        padding: 10px 14px;
-        margin: 6px 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        border: 1px solid rgba(128,128,128,0.12);
-    }
-
-    /* ===== ENSURE INLINE COLOR INHERITANCE ===== */
-    /* When parent div has color:#1e293b set inline, children should inherit it */
-    div[style*="color:#1e293b"] p:not([style*="color"]),
-    div[style*="color:#1e293b"] span:not([style*="color"]) {
-        color: #1e293b !important;
-    }
-
-    /* ===== DARK MODE: Force dark text on light-background inline cards ===== */
-    /* Streamlit dark mode uses [data-theme="dark"] on the root */
-    @media (prefers-color-scheme: dark) {
-        /* Any div/span with an explicit light background should keep dark text */
-        div[style*="background:#dbeafe"] p, div[style*="background:#dbeafe"] span,
-        div[style*="background:#d1fae5"] p, div[style*="background:#d1fae5"] span,
-        div[style*="background:#fef3c7"] p, div[style*="background:#fef3c7"] span,
-        div[style*="background:#f3e8ff"] p, div[style*="background:#f3e8ff"] span,
-        div[style*="background:#fee2e2"] p, div[style*="background:#fee2e2"] span,
-        div[style*="background:#fff7ed"] p, div[style*="background:#fff7ed"] span,
-        div[style*="background:#fdf4ff"] p, div[style*="background:#fdf4ff"] span,
-        div[style*="background:#f0fdf4"] p, div[style*="background:#f0fdf4"] span,
-        div[style*="background:#dcfce7"] p, div[style*="background:#dcfce7"] span,
-        div[style*="background:#fef9c3"] p, div[style*="background:#fef9c3"] span,
-        div[style*="background:#ffe4e6"] p, div[style*="background:#ffe4e6"] span,
-        div[style*="background:#fff1f2"] p, div[style*="background:#fff1f2"] span,
-        div[style*="background:#fffbeb"] p, div[style*="background:#fffbeb"] span,
-        div[style*="background:#eff6ff"] p, div[style*="background:#eff6ff"] span { color: #1e293b !important; }
-        p[style*="color:#64748b"] { color: #94a3b8 !important; }
-    }
-    /* Streamlit's own dark mode toggle (overrides system preference) */
-    [data-theme="dark"] div[style*="background:#dbeafe"] p,
-    [data-theme="dark"] div[style*="background:#dbeafe"] span,
-    [data-theme="dark"] div[style*="background:#d1fae5"] p,
-    [data-theme="dark"] div[style*="background:#d1fae5"] span,
-    [data-theme="dark"] div[style*="background:#fef3c7"] p,
-    [data-theme="dark"] div[style*="background:#fef3c7"] span,
-    [data-theme="dark"] div[style*="background:#f3e8ff"] p,
-    [data-theme="dark"] div[style*="background:#f3e8ff"] span,
-    [data-theme="dark"] div[style*="background:#fee2e2"] p,
-    [data-theme="dark"] div[style*="background:#fee2e2"] span,
-    [data-theme="dark"] div[style*="background:#fff7ed"] p,
-    [data-theme="dark"] div[style*="background:#fff7ed"] span,
-    [data-theme="dark"] div[style*="background:#fdf4ff"] p,
-    [data-theme="dark"] div[style*="background:#fdf4ff"] span,
-    [data-theme="dark"] div[style*="background:#f0fdf4"] p,
-    [data-theme="dark"] div[style*="background:#f0fdf4"] span,
-    [data-theme="dark"] div[style*="background:#dcfce7"] p,
-    [data-theme="dark"] div[style*="background:#dcfce7"] span,
-    [data-theme="dark"] div[style*="background:#fef9c3"] p,
-    [data-theme="dark"] div[style*="background:#fef9c3"] span,
-    [data-theme="dark"] div[style*="background:#ffe4e6"] p,
-    [data-theme="dark"] div[style*="background:#ffe4e6"] span,
-    [data-theme="dark"] div[style*="background:#fff1f2"] p,
-    [data-theme="dark"] div[style*="background:#fff1f2"] span,
-    [data-theme="dark"] div[style*="background:#fffbeb"] p,
-    [data-theme="dark"] div[style*="background:#fffbeb"] span,
-    [data-theme="dark"] div[style*="background:#eff6ff"] p,
-    [data-theme="dark"] div[style*="background:#eff6ff"] span { color: #1e293b !important; }
-    /* Streamlit dark: p3k tab containers need explicit dark text */
-    [data-theme="dark"] div[style*="background:#dbeafe"],
-    [data-theme="dark"] div[style*="background:#d1fae5"],
-    [data-theme="dark"] div[style*="background:#fef3c7"],
-    [data-theme="dark"] div[style*="background:#f3e8ff"],
-    [data-theme="dark"] div[style*="background:#fee2e2"],
-    [data-theme="dark"] div[style*="background:#fff7ed"],
-    [data-theme="dark"] div[style*="background:#fdf4ff"],
-    [data-theme="dark"] div[style*="background:#f0fdf4"],
-    [data-theme="dark"] div[style*="background:#dcfce7"],
-    [data-theme="dark"] div[style*="background:#fef9c3"],
-    [data-theme="dark"] div[style*="background:#ffe4e6"],
-    [data-theme="dark"] div[style*="background:#fff1f2"],
-    [data-theme="dark"] div[style*="background:#fffbeb"],
-    [data-theme="dark"] div[style*="background:#eff6ff"] { color: #1e293b; }
 
     </style>
     """, unsafe_allow_html=True)
@@ -703,7 +502,7 @@ def halaman_beranda():
               <div style="display:flex;align-items:flex-start;gap:12px;">
                 <span style="font-size:1.5rem;">{ikon}</span>
                 <div><strong>{judul}</strong>
-                <p style="margin:4px 0 0;font-size:0.85rem;opacity:0.75;">{isi}</p></div>
+                <p style="margin:4px 0 0;font-size:0.85rem;">{isi}</p></div>
               </div></div>""", unsafe_allow_html=True)
 
     with kol_kanan:
@@ -717,7 +516,7 @@ def halaman_beranda():
             st.markdown(f"""<div class="benefit-row">
               <span style="font-size:1.3rem;">{ikon}</span>
               <div><strong style="font-size:0.88rem;">{judul}</strong>
-              <p style="margin:2px 0 0;font-size:0.82rem;opacity:0.7;">{isi}</p></div></div>""", unsafe_allow_html=True)
+              <p style="margin:2px 0 0;font-size:0.82rem;">{isi}</p></div></div>""", unsafe_allow_html=True)
 
     st.markdown("---")
 
@@ -735,10 +534,10 @@ def halaman_beranda():
     ]
     for kolom, (ikon, judul, warna_bg, warna_teks, deskripsi) in zip([f1, f2, f3, f4], daftar_fitur):
         with kolom:
-            st.markdown(f"""<div style="background:{warna_bg};border-radius:14px;padding:16px;text-align:center;height:160px;border:1px solid rgba(0,0,0,0.08);">
+            st.markdown(f"""<div style="background:{warna_bg};border-radius:14px;padding:16px;text-align:center;height:160px;border:1px solid {warna_teks}25;">
               <div style="font-size:2rem;">{ikon}</div>
               <strong style="font-size:0.9rem;color:{warna_teks};">{judul}</strong>
-              <p style="font-size:0.78rem;color:#1e293b !important;margin-top:6px;">{deskripsi}</p>
+              <p style="font-size:0.78rem;color:{warna_teks};opacity:0.8;margin-top:6px;">{deskripsi}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -755,7 +554,7 @@ def halaman_beranda():
         st.markdown(f"""<div class="guide-step">
           <div class="guide-num" style="background:{warna};">{nomor}</div>
           <div><strong>{judul}</strong>
-          <p style="margin:2px 0 0;font-size:0.84rem;opacity:0.7;">{isi}</p></div>
+          <p style="margin:2px 0 0;font-size:0.84rem;">{isi}</p></div>
         </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -819,14 +618,14 @@ def halaman_msds():
     ]
     with kol_ki:
         for label, nilai, warna_bg in properti_kiri:
-            st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.10);color:#1e293b;">
-              <span style="font-size:0.78rem;color:#4b5563 !important;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
-              <p style="margin:3px 0 0;font-weight:600;color:#1e293b !important;">{nilai}</p></div>""", unsafe_allow_html=True)
+            st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.08);">
+              <span style="font-size:0.78rem;color:rgba(0,0,0,0.55);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
+              <p style="margin:3px 0 0;font-weight:600;color:rgba(0,0,0,0.85);">{nilai}</p></div>""", unsafe_allow_html=True)
     with kol_ka:
         for label, nilai, warna_bg in properti_kanan:
-            st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.10);color:#1e293b;">
-              <span style="font-size:0.78rem;color:#4b5563 !important;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
-              <p style="margin:3px 0 0;font-weight:600;color:#1e293b !important;">{nilai}</p></div>""", unsafe_allow_html=True)
+            st.markdown(f"""<div style="background:{warna_bg};padding:12px 16px;border-radius:10px;margin:6px 0;border:1px solid rgba(0,0,0,0.08);">
+              <span style="font-size:0.78rem;color:rgba(0,0,0,0.55);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">{label}</span>
+              <p style="margin:3px 0 0;font-weight:600;color:rgba(0,0,0,0.85);">{nilai}</p></div>""", unsafe_allow_html=True)
 
     st.markdown(f"""<div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:12px;padding:14px 18px;margin:10px 0;">
       <span style="font-size:0.78rem;color:#be123c;font-weight:700;text-transform:uppercase;">⚠️ Sifat Bahaya</span>
@@ -842,7 +641,7 @@ def halaman_msds():
                             border-radius:14px;padding:16px;text-align:center;height:130px;">
               <div style="font-size:2rem;">{info['emoji']}</div>
               <strong style="color:{info['color']};font-size:0.88rem;">{info['label']}</strong>
-              <p style="font-size:0.76rem;color:#1e293b !important;margin:4px 0 0;">{info['desc']}</p>
+              <p style="font-size:0.76rem;color:{info['color']};opacity:0.8;margin:4px 0 0;">{info['desc']}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -893,13 +692,13 @@ def halaman_tumpahan():
     for nomor, judul, isi, warna_bg, warna in urutan_langkah:
         st.markdown(f"""
         <div style="background:{warna_bg};border:1px solid {warna}30;border-radius:12px;
-                    padding:14px 18px;margin:8px 0;display:flex;align-items:flex-start;gap:12px;color:#1e293b;">
+                    padding:14px 18px;margin:8px 0;display:flex;align-items:flex-start;gap:12px;">
           <div style="background:{warna};color:white;width:30px;height:30px;border-radius:8px;
                       display:flex;align-items:center;justify-content:center;font-weight:800;
                       font-size:0.82rem;flex-shrink:0;">{nomor}</div>
-          <div style="color:#1e293b;">
+          <div>
             <strong style="color:{warna};font-size:0.88rem;text-transform:uppercase;letter-spacing:0.5px;">{judul}</strong>
-            <p style="margin:4px 0 0;font-size:0.88rem;color:#1e293b !important;">{isi}</p>
+            <p style="margin:4px 0 0;font-size:0.88rem;color:{warna};opacity:0.85;">{isi}</p>
           </div>
         </div>""", unsafe_allow_html=True)
 
@@ -951,14 +750,14 @@ def halaman_p3k():
 
     for tab, (ikon, judul, konten, warna_bg, warna) in zip(tab_p3k, isi_tab):
         with tab:
-            st.markdown(f"""<div style="background:{warna_bg};border:1px solid {warna}30;border-radius:14px;padding:18px 20px;margin:8px 0;color:#1e293b;">
+            st.markdown(f"""<div style="background:{warna_bg};border:1px solid {warna}30;border-radius:14px;padding:18px 20px;margin:8px 0;">
               <h4 style="color:{warna};margin:0 0 8px;">{ikon} {judul}</h4>
-              <p style="margin:0;font-size:0.9rem;color:#1e293b !important;line-height:1.7;">{konten}</p>
+              <p style="margin:0;font-size:0.9rem;color:{warna};opacity:0.85;line-height:1.7;">{konten}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown(f"""
     <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 18px;margin-top:10px;color:#78350f;">
-      <strong style="color:#92400e;">📌 Catatan Umum:</strong> <span style="color:#78350f;">{data_p3k["catatan"]}</span>
+      <strong>📌 Catatan Umum:</strong> {data_p3k["catatan"]}
     </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -977,7 +776,7 @@ def halaman_p3k():
             st.markdown(f"""<div style="background:{warna_bg};border-radius:12px;padding:14px;text-align:center;border:1px solid {warna}25;height:140px;">
               <div style="font-size:1.8rem;">{ikon}</div>
               <strong style="color:{warna};font-size:0.85rem;">{judul}</strong>
-              <p style="font-size:0.77rem;color:#1e293b !important;margin-top:6px;line-height:1.4;">{tips}</p>
+              <p style="font-size:0.77rem;color:{warna};opacity:0.8;margin-top:6px;line-height:1.4;">{tips}</p>
             </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -1023,7 +822,7 @@ def halaman_kuis():
             with kolom_kat[i % len(kolom_kat)]:
                 st.markdown(f"""<div style="text-align:center;padding:12px;background:#f3e8ff;border-radius:10px;margin:4px 0;border:1px solid #ddd6fe;">
                   <strong style="color:#7c3aed;font-size:0.85rem;">{kat}</strong>
-                  <p style="margin:2px 0;font-size:0.8rem;color:#1e293b !important;">{jml} soal</p></div>""", unsafe_allow_html=True)
+                  <p style="margin:2px 0;font-size:0.8rem;color:#6d28d9;">{jml} soal</p></div>""", unsafe_allow_html=True)
 
         if st.button("▶️ Mulai Kuis", type="primary", use_container_width=True):
             st.session_state.kuis_mulai   = True
@@ -1051,7 +850,7 @@ def halaman_kuis():
           <div style="font-size:3rem;">{pesan.split()[0]}</div>
           <h2 style="color:{warna_hasil};margin:8px 0;">{pesan[2:]}</h2>
           <p style="font-size:3rem;font-weight:800;color:{warna_hasil};margin:8px 0;">{nilai_akhir}/{total_soal}</p>
-          <p style="color:#64748b;">Skor: {persentase:.0f}%</p>
+          <p style="color:{warna_hasil};opacity:0.75;">Skor: {persentase:.0f}%</p>
         </div>""", unsafe_allow_html=True)
         if st.button("🔄 Ulangi Kuis", use_container_width=True):
             st.session_state.kuis_mulai   = False
@@ -1111,9 +910,9 @@ def halaman_kuis():
                 st.rerun()
 
     if sudah_jawab:
-        st.markdown(f"""<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px 18px;margin:10px 0;color:#1e293b;">
+        st.markdown(f"""<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px 18px;margin:10px 0;">
           <strong style="color:#15803d;">💡 Penjelasan:</strong>
-          <p style="margin:4px 0 0;color:#1e293b !important;font-size:0.88rem;">{soal['explanation']}</p>
+          <p style="margin:4px 0 0;color:#1e293b;font-size:0.88rem;">{soal['explanation']}</p>
         </div>""", unsafe_allow_html=True)
 
         if no_sekarang + 1 < len(soal_aktif):
@@ -1163,7 +962,7 @@ def halaman_tentang():
                       font-size:1.1rem;flex-shrink:0;">{huruf}</div>
           <div>
             <strong style="color:{warna};font-size:0.95rem;">{nama}</strong>
-            <p style="margin:3px 0 0;font-size:0.82rem;color:#1e293b !important;">🎓 Program Studi {prodi}</p>
+            <p style="margin:3px 0 0;font-size:0.82rem;color:#374151;">🎓 Program Studi {prodi}</p>
           </div>
         </div>""", unsafe_allow_html=True)
 
