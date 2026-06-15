@@ -346,7 +346,7 @@ def tampil_sidebar():
         st.divider()
         pilihan = st.radio(
             "📌 Navigasi",
-            options=["🏠 Beranda", "📋 Mini MSDS", "🚨 Pengendalian Tumpahan", "⚖️ Kalkulator BM", "🧠 Kuis Kimia", "👥 Tentang Kami"],
+            options=["🏠 Beranda", "📋 Mini MSDS", "🚨 Pengendalian Tumpahan", "🩺 Pertolongan Pertama", "🧠 Kuis Kimia", "👥 Tentang Kami"],
             label_visibility="collapsed"
         )
         st.divider()
@@ -374,7 +374,7 @@ def halaman_beranda():
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">📊 Mini MSDS</span>
         <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🚨 Prosedur Darurat</span>
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">⚖️ Kalkulator BM</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🩺 Pertolongan Pertama</span>
         <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🧠 Kuis Interaktif</span>
       </div>
     </div>
@@ -441,9 +441,9 @@ def halaman_beranda():
         ("📋", "Mini MSDS",             "#dbeafe", "#1d4ed8",
          "Database 74 bahan kimia lengkap dengan rumus, sifat fisik, wujud, warna, bau & simbol GHS."),
         ("🚨", "Pengendalian Tumpahan", "#fee2e2", "#dc2626",
-         "Prosedur langkah demi langkah penanganan tumpahan + P3K detail per jalur paparan."),
-        ("⚖️", "Kalkulator BM",         "#d1fae5", "#059669",
-         "Hitung berat molekul senyawa secara akurat dengan input jumlah atom per unsur."),
+         "Prosedur langkah demi langkah penanganan tumpahan bahan kimia beserta APD yang diperlukan."),
+        ("🩺", "Pertolongan Pertama",  "#d1fae5", "#059669",
+         "Panduan P3K detail per jalur paparan: kulit, mata, terhirup, dan tertelan."),
         ("🧠", "Kuis Interaktif",       "#f3e8ff", "#7c3aed",
          f"{len(DAFTAR_SOAL)} soal pilihan ganda seputar sifat, bahaya, APD, dan prosedur kimia lab."),
     ]
@@ -460,9 +460,9 @@ def halaman_beranda():
     st.markdown("### 📖 Panduan Penggunaan")
     langkah_panduan = [
         ("1", "🧭 Navigasi Sidebar",   "Pilih fitur yang diinginkan melalui menu di sebelah kiri layar.", "#1e3a5f"),
-        ("2", "🔍 Mini MSDS",          "Pilih nama bahan kimia dari dropdown untuk melihat informasi lengkap, sifat bahaya, dan simbol GHS.", "#0f4c75"),
-        ("3", "🚨 Tumpahan & P3K",     "Pilih bahan kimia yang terlibat insiden untuk mendapatkan prosedur penanganan darurat yang detail.", "#dc2626"),
-        ("4", "⚖️ Kalkulator BM",      "Masukkan jumlah atom setiap unsur dalam senyawa untuk menghitung berat molekul secara otomatis.", "#059669"),
+        ("2", "🔍 Mini MSDS",          "Pilih nama bahan kimia atau cari dengan rumus kimia untuk melihat informasi lengkap, sifat bahaya, dan simbol GHS.", "#0f4c75"),
+        ("3", "🚨 Tumpahan",           "Pilih bahan kimia yang terlibat insiden untuk mendapatkan prosedur penanganan tumpahan yang detail.", "#dc2626"),
+        ("4", "🩺 Pertolongan Pertama","Pilih bahan kimia untuk panduan P3K berdasarkan jalur paparan: kulit, mata, terhirup, dan tertelan.", "#059669"),
         ("5", "🧠 Kuis Kimia",         "Uji pemahaman kamu tentang keselamatan kimia lab melalui 15 soal interaktif yang beragam.", "#7c3aed"),
     ]
     for nomor, judul, isi, warna in langkah_panduan:
@@ -493,8 +493,8 @@ def halaman_msds():
     st.markdown("## 🏠 Sistem Informasi Bahan Kimia — Mini MSDS")
     st.markdown("Pilih bahan kimia untuk menampilkan informasi lengkap termasuk sifat fisik, simbol bahaya GHS, dan klasifikasi LGK.")
 
-    kata_cari = st.text_input("🔍 Cari nama bahan kimia...", placeholder="Contoh: Asam, Etanol, Natrium...")
-    hasil_cari = [b for b in daftar_bahan if kata_cari.lower() in b["nama_senyawa"].lower()] if kata_cari else daftar_bahan
+    kata_cari = st.text_input("🔍 Cari nama atau rumus kimia...", placeholder="Contoh: Asam, Etanol, H2SO4, NaCl...")
+    hasil_cari = [b for b in daftar_bahan if kata_cari.lower() in b["nama_senyawa"].lower() or kata_cari.lower() in b["rumus_kimia"].lower()] if kata_cari else daftar_bahan
 
     pilihan_dropdown = [f"{b['nama_senyawa']}  ({b['rumus_kimia']})" for b in hasil_cari]
     if not pilihan_dropdown:
@@ -567,11 +567,18 @@ def halaman_msds():
 
 
 def halaman_tumpahan():
-    st.markdown("## 🚨 Prosedur K3L: Penanganan Tumpahan & P3K")
-    st.markdown("Panduan penanganan darurat tumpahan bahan kimia dan pertolongan pertama berdasarkan jalur paparan.")
+    st.markdown("## 🚨 Prosedur Pengendalian Tumpahan")
+    st.markdown("Panduan penanganan darurat tumpahan bahan kimia berdasarkan sifat bahaya bahan.")
 
-    pilihan_dropdown = [f"{b['nama_senyawa']}  ({b['rumus_kimia']})" for b in daftar_bahan]
-    label_terpilih  = st.selectbox("⚗️ Pilih Bahan Kimia yang Terlibat Insiden:", pilihan_dropdown)
+    kata_cari = st.text_input("🔍 Cari nama atau rumus kimia...", placeholder="Contoh: Asam, Etanol, H2SO4, NaCl...", key="cari_tumpahan")
+    hasil_cari = [b for b in daftar_bahan if kata_cari.lower() in b["nama_senyawa"].lower() or kata_cari.lower() in b["rumus_kimia"].lower()] if kata_cari else daftar_bahan
+
+    pilihan_dropdown = [f"{b['nama_senyawa']}  ({b['rumus_kimia']})" for b in hasil_cari]
+    if not pilihan_dropdown:
+        st.warning("Bahan kimia tidak ditemukan. Coba kata kunci lain.")
+        return
+
+    label_terpilih  = st.selectbox("⚗️ Pilih Bahan Kimia yang Terlibat Insiden:", pilihan_dropdown, key="sel_tumpahan")
     nama_terpilih   = label_terpilih.split("  (")[0]
     bahan           = next(b for b in daftar_bahan if b["nama_senyawa"] == nama_terpilih)
 
@@ -582,7 +589,7 @@ def halaman_tumpahan():
     st.markdown(f"""
     <div style="background:linear-gradient(135deg,{wc}22,{wc}0a);border-left:5px solid {wc};
                 border-radius:0 14px 14px 0;padding:16px 20px;margin:12px 0;">
-      <h3 style="margin:0;color:{wc};">⚠️ Tindakan Darurat: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
+      <h3 style="margin:0;color:{wc};">🚨 Tumpahan: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
       <p style="margin:4px 0 0;color:#64748b;font-size:0.88rem;">Sifat Bahaya: <strong style="color:{wc};">{bahan['sifat']}</strong></p>
     </div>""", unsafe_allow_html=True)
 
@@ -614,9 +621,46 @@ def halaman_tumpahan():
         </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
+    st.markdown("""
+    <div style="background:#fee2e2;border-radius:12px;padding:14px 18px;font-size:0.85rem;color:#7f1d1d;">
+      <strong>🚑 PENTING:</strong> Untuk kasus tumpahan besar atau bahan berbahaya tinggi, segera hubungi 
+      petugas keselamatan laboratorium dan IGD / Nomor Darurat <strong>119</strong>. Gunakan fitur 
+      <strong>🩺 Pertolongan Pertama</strong> di menu kiri untuk panduan P3K jika ada korban paparan.
+    </div>""", unsafe_allow_html=True)
 
-    st.markdown("### 🩺 Pertolongan Pertama (P3K)")
-    st.markdown("Tindakan berdasarkan jalur paparan:")
+
+def halaman_p3k():
+    st.markdown("## 🩺 Pertolongan Pertama (P3K)")
+    st.markdown("Panduan pertolongan pertama berdasarkan jalur paparan bahan kimia: kulit, mata, terhirup, dan tertelan.")
+
+    kata_cari = st.text_input("🔍 Cari nama atau rumus kimia...", placeholder="Contoh: Asam, Etanol, H2SO4, NaCl...", key="cari_p3k")
+    hasil_cari = [b for b in daftar_bahan if kata_cari.lower() in b["nama_senyawa"].lower() or kata_cari.lower() in b["rumus_kimia"].lower()] if kata_cari else daftar_bahan
+
+    pilihan_dropdown = [f"{b['nama_senyawa']}  ({b['rumus_kimia']})" for b in hasil_cari]
+    if not pilihan_dropdown:
+        st.warning("Bahan kimia tidak ditemukan. Coba kata kunci lain.")
+        return
+
+    label_terpilih = st.selectbox("⚗️ Pilih Bahan Kimia yang Terlibat:", pilihan_dropdown, key="sel_p3k")
+    nama_terpilih  = label_terpilih.split("  (")[0]
+    bahan          = next(b for b in daftar_bahan if b["nama_senyawa"] == nama_terpilih)
+
+    simbol_ghs  = cari_simbol_ghs(bahan["sifat"])
+    info_utama  = TABEL_GHS[simbol_ghs[0]]
+    wc          = info_utama["color"]
+
+    st.markdown(f"""
+    <div style="background:linear-gradient(135deg,{wc}22,{wc}0a);border-left:5px solid {wc};
+                border-radius:0 14px 14px 0;padding:16px 20px;margin:12px 0;">
+      <h3 style="margin:0;color:{wc};">🩺 P3K: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
+      <p style="margin:4px 0 0;color:#64748b;font-size:0.88rem;">Sifat Bahaya: <strong style="color:{wc};">{bahan['sifat']}</strong></p>
+    </div>""", unsafe_allow_html=True)
+
+    html_badge = " ".join(f'<span style="background:{TABEL_GHS[g]["bg"]};color:{TABEL_GHS[g]["color"]};padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700;">{TABEL_GHS[g]["emoji"]} {TABEL_GHS[g]["label"]}</span>' for g in simbol_ghs)
+    st.markdown(f"<div style='margin:8px 0;'>{html_badge}</div>", unsafe_allow_html=True)
+
+    st.markdown("### 🩺 Tindakan Pertolongan Pertama")
+    st.markdown("Pilih jalur paparan yang terjadi:")
 
     data_p3k  = buat_panduan_p3k(bahan["nama_senyawa"], bahan["sifat"], bahan["pertolongan_pertama"])
     tab_p3k   = st.tabs(["🖐️ Kulit", "👁️ Mata", "😮‍💨 Terhirup", "🫀 Tertelan"])
@@ -646,76 +690,6 @@ def halaman_tumpahan():
       segera hubungi IGD / Nomor Darurat <strong>119</strong> atau Poliklinik kampus. Bawa kartu data keselamatan (SDS) 
       bahan kimia kepada petugas medis.
     </div>""", unsafe_allow_html=True)
-
-
-def halaman_kalkulator():
-    st.markdown("## ⚖️ Kalkulator Berat Molekul (BM)")
-    st.markdown("Hitung berat molekul senyawa berdasarkan jumlah atom setiap unsur. Massa atom relatif menggunakan standar IUPAC.")
-
-    MASSA_ATOM = {
-        "H": 1.008,  "C": 12.011, "N": 14.007, "O": 15.999,
-        "Na": 22.990, "Mg": 24.305, "Al": 26.982, "S": 32.06,
-        "Cl": 35.45,  "K": 39.098, "Ca": 40.078, "Fe": 55.845,
-        "Cu": 63.546, "Zn": 65.38, "Br": 79.904, "Ag": 107.868,
-        "Ba": 137.327, "Pb": 207.2, "Hg": 200.592, "Cr": 51.996,
-        "Mn": 54.938, "P": 30.974, "I": 126.904,  "Sn": 118.71,
-    }
-
-    st.markdown("""<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:0.85rem;color:#0369a1;">
-      💡 <strong>Petunjuk:</strong> Masukkan jumlah atom setiap unsur dalam senyawa. Kosongkan atau isikan 0 untuk unsur yang tidak ada.
-    </div>""", unsafe_allow_html=True)
-
-    kelompok_unsur = [
-        ("Nonlogam Umum",      [("H","Hidrogen"),("C","Karbon"),("N","Nitrogen"),("O","Oksigen"),("S","Belerang"),("P","Fosfor")]),
-        ("Halogen",            [("Cl","Klor"),("Br","Brom"),("I","Iodium")]),
-        ("Logam Alkali",       [("Na","Natrium"),("K","Kalium")]),
-        ("Logam Alkali Tanah", [("Mg","Magnesium"),("Ca","Kalsium"),("Ba","Barium")]),
-        ("Logam Transisi",     [("Fe","Besi"),("Cu","Tembaga"),("Zn","Seng"),("Cr","Kromium"),("Mn","Mangan"),("Ag","Perak"),("Pb","Timbal"),("Hg","Raksa"),("Al","Aluminium"),("Sn","Timah")]),
-    ]
-
-    jumlah_atom = {}
-    for nama_grup, isi_grup in kelompok_unsur:
-        st.markdown(f"**{nama_grup}**")
-        baris = st.columns(len(isi_grup))
-        for i, (simbol, nama_unsur) in enumerate(isi_grup):
-            with baris[i]:
-                nilai = st.number_input(f"{simbol}\n({nama_unsur})", min_value=0, value=0, step=1, key=f"atom_{simbol}")
-                jumlah_atom[simbol] = nilai
-
-    st.markdown("---")
-
-    if st.button("⚖️ Hitung Berat Molekul", type="primary", use_container_width=True):
-        bm_total   = sum(jumlah_atom[sim] * MASSA_ATOM[sim] for sim in jumlah_atom)
-        atom_aktif = [(sim, n) for sim, n in jumlah_atom.items() if n > 0]
-
-        if not atom_aktif:
-            st.warning("⚠️ Masukkan minimal satu atom untuk menghitung BM.")
-        else:
-            rumus_str = "".join(f"{sim}{n if n > 1 else ''}" for sim, n in atom_aktif)
-            st.markdown(f"""
-            <div style="background:linear-gradient(135deg,#1e3a5f,#0f4c75);color:white;border-radius:16px;
-                        padding:24px;text-align:center;margin:16px 0;">
-              <p style="margin:0;font-size:0.85rem;opacity:0.8;">Rumus dari input:</p>
-              <p style="font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;margin:4px 0;">{rumus_str}</p>
-              <p style="margin:8px 0 4px;font-size:0.85rem;opacity:0.8;">Berat Molekul:</p>
-              <p style="font-size:2.5rem;font-weight:800;margin:0;">{bm_total:.3f}</p>
-              <p style="font-size:0.9rem;opacity:0.8;margin:0;">g/mol</p>
-            </div>""", unsafe_allow_html=True)
-
-            st.markdown("#### 📊 Rincian Perhitungan")
-            akumulasi = 0
-            for sim, n in atom_aktif:
-                bobot = n * MASSA_ATOM[sim]
-                akumulasi += bobot
-                persen = (bobot / bm_total * 100)
-                st.markdown(f"""<div style="display:flex;justify-content:space-between;align-items:center;
-                                padding:8px 14px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;margin:4px 0;">
-                  <span style="font-weight:600;">{sim} ({n} atom × {MASSA_ATOM[sim]} g/mol)</span>
-                  <span style="color:#1e3a5f;font-weight:700;">{bobot:.3f} g/mol <span style="color:#64748b;font-size:0.82rem;">({persen:.1f}%)</span></span>
-                </div>""", unsafe_allow_html=True)
-            st.markdown(f"""<div style="display:flex;justify-content:space-between;padding:10px 14px;
-                            border-radius:8px;background:#1e3a5f;color:white;margin-top:6px;font-weight:700;">
-              <span>Total BM</span><span>{akumulasi:.3f} g/mol</span></div>""", unsafe_allow_html=True)
 
 
 def halaman_kuis():
@@ -940,8 +914,8 @@ def jalankan():
         halaman_msds()
     elif "Tumpahan" in halaman:
         halaman_tumpahan()
-    elif "Kalkulator" in halaman:
-        halaman_kalkulator()
+    elif "Pertolongan" in halaman:
+        halaman_p3k()
     elif "Kuis" in halaman:
         halaman_kuis()
     elif "Tentang" in halaman:
