@@ -656,7 +656,7 @@ def halaman_beranda():
          "Database 74 bahan kimia lengkap dengan rumus, sifat fisik, wujud, warna, bau & simbol GHS."),
         ("🚨", "Pengendalian Tumpahan", "#fee2e2", "#dc2626",
          "Prosedur langkah demi langkah penanganan tumpahan bahan kimia berbahaya."),
-        ("🩺", "Pertolongan Pertama",   "#d1fae5", "#059669",
+        ("⛑️", "Pertolongan Pertama",   "#d1fae5", "#059669",
          "Panduan P3K detail per jalur paparan: kulit, mata, terhirup, dan tertelan."),
         ("🧠", "Kuis Interaktif",       "#f3e8ff", "#7c3aed",
          f"{len(DAFTAR_SOAL)} soal pilihan ganda seputar sifat, bahaya, APD, dan prosedur kimia lab."),
@@ -1061,7 +1061,7 @@ def halaman_tentang():
 
     st.markdown("""
     <div style="background:linear-gradient(135deg,#1e3a5f,#0f4c75);color:white;border-radius:18px;padding:28px 32px;margin-bottom:24px;">
-      <h3 style="color:white;margin:0 0 8px;">⚗️ Mini MSDS & Safety Guide</h3>
+      <h3 style="color:white;margin:0 0 8px;">📋 Mini MSDS & Safety Guide</h3>
       <p style="opacity:0.9;margin:0 0 12px;color:white;">
         Proyek ini dikembangkan sebagai tugas akhir Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         oleh mahasiswa Program Studi Analisis Kimia, Politeknik AKA Bogor.
@@ -1121,7 +1121,7 @@ def halaman_tentang():
     st.markdown("""
     <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:16px;
                 padding:22px 28px;color:white;text-align:center;">
-      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">⚗️ <strong>Mini MSDS & Safety Guide v3.0</strong></p>
+      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">📋 <strong>Mini MSDS & Safety Guide v3.0</strong></p>
       <p style="font-size:0.82rem;opacity:0.8;margin:0;color:white;line-height:1.7;">
         Website ini dikembangkan sebagai proyek Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         untuk membantu akses informasi keselamatan bahan kimia secara cepat, praktis, dan interaktif.<br>
