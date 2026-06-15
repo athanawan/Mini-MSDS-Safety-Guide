@@ -250,6 +250,56 @@ def pasang_css():
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
+    /* ===== ADAPTIVE COLOR VARIABLES (light/dark safe) ===== */
+    :root {
+        --text-strong: #1e293b;
+        --text-soft: rgba(30,41,59,0.75);
+        --card-bg: rgba(255,255,255,0.72);
+        --card-border: rgba(15,76,117,0.15);
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --text-strong: #f1f5f9;
+            --text-soft: rgba(241,245,249,0.75);
+            --card-bg: rgba(30,41,59,0.55);
+            --card-border: rgba(148,163,184,0.18);
+        }
+    }
+
+    /* ===== ELEGANT LAB-THEMED BACKGROUND ===== */
+    [data-testid="stAppViewContainer"] {
+        background:
+            radial-gradient(circle at 15% 20%, rgba(15,76,117,0.10) 0%, transparent 45%),
+            radial-gradient(circle at 85% 10%, rgba(123,45,139,0.08) 0%, transparent 40%),
+            radial-gradient(circle at 50% 90%, rgba(22,163,74,0.06) 0%, transparent 45%),
+            linear-gradient(135deg, #f8fafc 0%, #eef2f7 50%, #f5f7fb 100%);
+        background-attachment: fixed;
+    }
+    @media (prefers-color-scheme: dark) {
+        [data-testid="stAppViewContainer"] {
+            background:
+                radial-gradient(circle at 15% 20%, rgba(56,189,248,0.07) 0%, transparent 45%),
+                radial-gradient(circle at 85% 10%, rgba(168,85,247,0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 90%, rgba(34,197,94,0.05) 0%, transparent 45%),
+                linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #111827 100%);
+            background-attachment: fixed;
+        }
+    }
+    [data-testid="stHeader"] { background: transparent !important; }
+
+    /* Force readable default text color across modes */
+    .main, .main p, .main li, .main span:not([style*="color"]) {
+        color: var(--text-strong);
+    }
+
+    /* Subtle elegant card backdrop so content stays readable on busy bg */
+    .chem-card, .prop-card, .step-block, .p3k-box, .quiz-box, .member-card,
+    .guide-step, .benefit-row, .feature-card, .hero-stat {
+        background: var(--card-bg) !important;
+        backdrop-filter: blur(6px);
+        border-color: var(--card-border) !important;
+    }
+
     /* ===== SIDEBAR ===== */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
