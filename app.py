@@ -582,7 +582,7 @@ def halaman_beranda():
       <div style="position:absolute;bottom:-60px;left:60%;width:150px;height:150px;
                   background:rgba(255,255,255,0.04);border-radius:50%;"></div>
       <p style="font-size:0.85rem;letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin:0 0 8px;color:white;">
-        ⚗️ Platform Informasi Kimia Lab
+        📋 Platform Informasi Kimia Lab
       </p>
       <h1 style="font-size:2.6rem;font-weight:800;margin:0 0 10px;line-height:1.2;color:white;">
         Mini MSDS & Safety Guide
