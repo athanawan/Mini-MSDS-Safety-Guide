@@ -250,12 +250,21 @@ def pasang_css():
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* ===== ADAPTIVE COLOR VARIABLES (Light/Dark Safe) ===== */
+    /* ===== ADAPTIVE COLOR VARIABLES ===== */
     :root {
-        --bg-card: var(--secondary-background-color, white);
+        /* Kartu mengambil warna utama (Putih di Light Mode, Gelap di Dark Mode) */
+        --bg-card: var(--background-color); 
         --border-card: var(--border-color, #e2e8f0);
         --text-main: var(--text-color, #1e293b);
         --text-muted: var(--text-color, #64748b);
+    }
+
+    /* ===== MAIN BACKGROUND ===== */
+    /* Mengubah background utama agar BUKAN putih polos, melainkan abu-abu sangat muda/kebiruan */
+    [data-testid="stAppViewContainer"] {
+        background-color: var(--secondary-background-color) !important;
+        /* Tambahan tekstur gradient tipis agar lebih elegan */
+        background-image: linear-gradient(135deg, rgba(148, 163, 184, 0.05) 0%, rgba(15, 23, 42, 0.02) 100%);
     }
 
     /* Memaksa teks utama terbaca di semua mode */
@@ -263,27 +272,37 @@ def pasang_css():
         color: var(--text-main);
     }
 
+    /* ===== SIDEBAR (ELEGANT DARK NAVY) ===== */
+    /* Sidebar dikunci ke warna gelap yang profesional dan kontras */
     [data-testid="stSidebar"] {
-        background: var(--secondary-background-color) !important;
-        border-right: 1px solid var(--border-card);
+        background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
+        border-right: 1px solid #334155 !important;
     }
-    [data-testid="stSidebar"] * { color: var(--text-color) !important; }
+    /* Memaksa SEMUA tulisan di dalam sidebar menjadi putih agar terbaca jelas */
+    [data-testid="stSidebar"] * { 
+        color: #f8fafc !important; 
+    }
     [data-testid="stSidebar"] .stRadio label {
         font-size: 0.9rem !important;
         padding: 6px 4px !important;
+        color: #f8fafc !important;
     }
 
+    /* ===== CARDS & BOXES ===== */
+    /* Agar terlihat menonjol dari background yang sekarang keabu-abuan */
     .main .block-container { padding-top: 1.5rem; max-width: 1100px; }
 
-    .chem-card {
+    .chem-card, .hero-stat, .quiz-option, [data-testid="metric-container"] {
         background: var(--bg-card);
         border-radius: 14px;
-        padding: 20px;
         border: 1px solid var(--border-card);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
         margin-bottom: 12px;
         color: var(--text-main);
     }
+    .chem-card { padding: 20px; }
+    .hero-stat { text-align: center; padding: 18px; }
+    
     .info-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -308,7 +327,7 @@ def pasang_css():
     }
     .step-card {
         border-left: 4px solid #3b82f6;
-        background: rgba(59, 130, 246, 0.1); /* Transparan agar aman di dark mode */
+        background: rgba(59, 130, 246, 0.08); 
         padding: 10px 16px;
         border-radius: 0 10px 10px 0;
         margin: 8px 0;
@@ -320,44 +339,29 @@ def pasang_css():
         margin: 8px 0;
         font-size: 0.88rem;
         border: 1px solid var(--border-card);
-    }
-    .hero-stat {
-        text-align: center;
-        padding: 18px;
-        border-radius: 14px;
         background: var(--bg-card);
-        border: 1px solid var(--border-card);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     .quiz-option {
         cursor: pointer;
         padding: 10px 14px;
-        border-radius: 10px;
-        border: 2px solid var(--border-card);
-        margin: 6px 0;
-        font-size: 0.9rem;
-        background: var(--bg-card);
-        color: var(--text-main);
     }
+    
     .sidebar-logo {
         font-family: 'Space Mono', monospace;
         font-size: 1.1rem;
         font-weight: 700;
-        color: var(--text-color) !important;
         padding: 4px 0;
     }
     h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--text-main); }
-
     hr { border: none; border-top: 1px solid var(--border-card); margin: 16px 0; }
-
-    [data-testid="metric-container"] { background: var(--bg-card); border-radius: 12px; padding: 12px; border: 1px solid var(--border-card); }
     </style>
     """, unsafe_allow_html=True)
 
 def tampil_sidebar():
     with st.sidebar:
         st.markdown('<div class="sidebar-logo">📋 Mini MSDS & Safety Guide</div>', unsafe_allow_html=True)
-        st.markdown('<p style="font-size:0.75rem;color:var(--text-color)!important;margin-top:2px;opacity:0.7;">v3.0 · Sistem Informasi Kimia</p>', unsafe_allow_html=True)
+        # Warna teks diubah ke #cbd5e1 (Abu-abu terang) agar cocok dengan sidebar gelap
+        st.markdown('<p style="font-size:0.75rem;color:#cbd5e1!important;margin-top:2px;opacity:0.8;">v3.0 · Sistem Informasi Kimia</p>', unsafe_allow_html=True)
         st.divider()
         pilihan = st.radio(
             "📌 Navigasi",
@@ -365,7 +369,7 @@ def tampil_sidebar():
             label_visibility="collapsed"
         )
         st.divider()
-        st.markdown('<p style="font-size:0.72rem;color:var(--text-color)!important;opacity:0.7;">Politeknik AKA Bogor<br>Analisis Kimia · Kel. 2</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:0.72rem;color:#cbd5e1!important;opacity:0.8;">Politeknik AKA Bogor<br>Analisis Kimia · Kel. 2</p>', unsafe_allow_html=True)
     return pilihan
 
 def halaman_beranda():
