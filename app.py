@@ -250,83 +250,35 @@ def pasang_css():
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* ===== ADAPTIVE COLOR VARIABLES (light/dark safe) ===== */
+    /* ===== PERBAIKAN: ADAPTIVE COLOR MENGGUNAKAN TEMA STREAMLIT ===== */
+    /* Menghubungkan warna langsung dengan toggle mode Terang/Gelap Streamlit */
     :root {
-        --text-strong: #1e293b;
-        --text-soft: rgba(30,41,59,0.75);
-        --card-bg: rgba(255,255,255,0.72);
-        --card-border: rgba(15,76,117,0.15);
-    }
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --text-strong: #f1f5f9;
-            --text-soft: rgba(241,245,249,0.75);
-            --card-bg: rgba(30,41,59,0.55);
-            --card-border: rgba(148,163,184,0.18);
-        }
-    }
-    /* Streamlit's manual theme toggle sets data-theme on html/body,
-       which can differ from the OS prefers-color-scheme. Honor it explicitly. */
-    html[data-theme="dark"], body[data-theme="dark"], .stApp[data-theme="dark"] {
-        --text-strong: #f1f5f9;
-        --text-soft: rgba(241,245,249,0.75);
-        --card-bg: rgba(30,41,59,0.55);
-        --card-border: rgba(148,163,184,0.18);
-    }
-    html[data-theme="light"], body[data-theme="light"], .stApp[data-theme="light"] {
-        --text-strong: #1e293b;
-        --text-soft: rgba(30,41,59,0.75);
-        --card-bg: rgba(255,255,255,0.72);
-        --card-border: rgba(15,76,117,0.15);
+        --text-strong: var(--text-color);
+        --text-soft: var(--text-color);
+        --card-bg: var(--secondary-background-color);
+        --card-border: var(--border-color, rgba(128,128,128,0.2));
     }
 
     /* ===== ELEGANT LAB-THEMED BACKGROUND ===== */
     [data-testid="stAppViewContainer"] {
-        background:
-            radial-gradient(circle at 15% 20%, rgba(15,76,117,0.10) 0%, transparent 45%),
-            radial-gradient(circle at 85% 10%, rgba(123,45,139,0.08) 0%, transparent 40%),
-            radial-gradient(circle at 50% 90%, rgba(22,163,74,0.06) 0%, transparent 45%),
-            linear-gradient(135deg, #f8fafc 0%, #eef2f7 50%, #f5f7fb 100%);
+        /* Gunakan background Streamlit sebagai dasar agar auto-berubah */
+        background-color: var(--background-color);
+        /* Gradient tipis untuk kesan elegan (transparan agar aman di mode apapun) */
+        background-image:
+            radial-gradient(circle at 15% 20%, rgba(15,76,117,0.05) 0%, transparent 45%),
+            radial-gradient(circle at 85% 10%, rgba(123,45,139,0.05) 0%, transparent 40%),
+            radial-gradient(circle at 50% 90%, rgba(22,163,74,0.05) 0%, transparent 45%);
         background-attachment: fixed;
     }
-    @media (prefers-color-scheme: dark) {
-        [data-testid="stAppViewContainer"] {
-            background:
-                radial-gradient(circle at 15% 20%, rgba(56,189,248,0.07) 0%, transparent 45%),
-                radial-gradient(circle at 85% 10%, rgba(168,85,247,0.06) 0%, transparent 40%),
-                radial-gradient(circle at 50% 90%, rgba(34,197,94,0.05) 0%, transparent 45%),
-                linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #111827 100%);
-            background-attachment: fixed;
-        }
-    }
-    html[data-theme="dark"] [data-testid="stAppViewContainer"],
-    body[data-theme="dark"] [data-testid="stAppViewContainer"],
-    .stApp[data-theme="dark"] [data-testid="stAppViewContainer"] {
-        background:
-            radial-gradient(circle at 15% 20%, rgba(56,189,248,0.07) 0%, transparent 45%),
-            radial-gradient(circle at 85% 10%, rgba(168,85,247,0.06) 0%, transparent 40%),
-            radial-gradient(circle at 50% 90%, rgba(34,197,94,0.05) 0%, transparent 45%),
-            linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #111827 100%);
-        background-attachment: fixed;
-    }
-    html[data-theme="light"] [data-testid="stAppViewContainer"],
-    body[data-theme="light"] [data-testid="stAppViewContainer"],
-    .stApp[data-theme="light"] [data-testid="stAppViewContainer"] {
-        background:
-            radial-gradient(circle at 15% 20%, rgba(15,76,117,0.10) 0%, transparent 45%),
-            radial-gradient(circle at 85% 10%, rgba(123,45,139,0.08) 0%, transparent 40%),
-            radial-gradient(circle at 50% 90%, rgba(22,163,74,0.06) 0%, transparent 45%),
-            linear-gradient(135deg, #f8fafc 0%, #eef2f7 50%, #f5f7fb 100%);
-        background-attachment: fixed;
-    }
+    
     [data-testid="stHeader"] { background: transparent !important; }
 
-    /* Force readable default text color across modes */
+    /* Memaksa teks utama terbaca di semua mode */
     .main, .main p, .main li, .main span:not([style*="color"]) {
-        color: var(--text-strong);
+        color: var(--text-color);
     }
 
-    /* Subtle elegant card backdrop so content stays readable on busy bg */
+    /* ===== KARTU / CARDS AGAR ADAPTIF ===== */
     .chem-card, .prop-card, .step-block, .p3k-box, .quiz-box, .member-card,
     .guide-step, .benefit-row, .feature-card, .hero-stat {
         background: var(--card-bg) !important;
@@ -336,10 +288,10 @@ def pasang_css():
 
     /* ===== SIDEBAR ===== */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
-        border-right: 1px solid #334155;
+        background: var(--secondary-background-color) !important;
+        border-right: 1px solid var(--card-border);
     }
-    [data-testid="stSidebar"] * { color: #e2e8f0 !important; }
+    [data-testid="stSidebar"] * { color: var(--text-color) !important; }
     [data-testid="stSidebar"] .stRadio label {
         font-size: 0.9rem !important;
         padding: 6px 4px !important;
@@ -347,248 +299,54 @@ def pasang_css():
 
     .main .block-container { padding-top: 1.5rem; max-width: 1100px; }
 
-    /* ===== DARK/LIGHT MODE ADAPTIVE CARDS ===== */
-    /* Info chips & property cards */
-    .prop-card {
-        padding: 12px 16px;
-        border-radius: 10px;
-        margin: 6px 0;
-        border: 1px solid rgba(128,128,128,0.2);
-    }
-    .prop-label {
-        font-size: 0.78rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        opacity: 0.65;
-    }
-    .prop-value {
-        margin: 3px 0 0;
-        font-weight: 600;
+    /* ===== DETAIL KARTU ===== */
+    .prop-card { padding: 12px 16px; border-radius: 10px; margin: 6px 0; border: 1px solid var(--card-border); }
+    .prop-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; opacity: 0.7; color: var(--text-color); }
+    .prop-value { margin: 3px 0 0; font-weight: 600; color: var(--text-color); }
+
+    .chem-card { border-radius: 14px; padding: 20px; border: 1px solid var(--card-border); box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 12px; }
+
+    .sidebar-logo { font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--text-color) !important; padding: 4px 0; }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--text-color); }
+    hr { border: none; border-top: 1px solid var(--card-border); margin: 16px 0; }
+    .stButton > button { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
+
+    /* ===== HERO STATS (YANG HILANG DI SCREENSHOT) ===== */
+    .hero-stat { text-align: center; padding: 18px; border-radius: 14px; border: 1px solid var(--card-border); }
+    .hero-stat .stat-num { font-size: 2rem; font-weight: 800; }
+    .hero-stat .stat-label { font-size: 0.8rem; margin-top: 4px; opacity: 0.8; color: var(--text-color) !important; }
+
+    /* OVERRIDE: Menimpa warna hardcode dari inline-HTML python agar adaptif */
+    .chem-card p, .chem-card strong, .chem-card span,
+    .benefit-row p, .benefit-row strong,
+    .guide-step p, .guide-step strong {
+        color: var(--text-color) !important;
     }
 
-    /* Generic card for light/dark compatibility */
-    .chem-card {
-        border-radius: 14px;
-        padding: 20px;
-        border: 1px solid rgba(128,128,128,0.2);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        margin-bottom: 12px;
-    }
+    /* Tumpahan step */
+    .step-block { border-radius: 12px; padding: 14px 18px; margin: 8px 0; display: flex; align-items: flex-start; gap: 12px; border: 1px solid var(--card-border); }
+    .step-num { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.82rem; flex-shrink: 0; color: white; }
+    .step-title { font-size: 0.88rem; text-transform: uppercase; font-weight: 700; margin: 0 0 4px; color: var(--text-color) !important; }
+    .step-content { font-size: 0.88rem; margin: 0; line-height: 1.6; color: var(--text-color) !important; }
 
-    .sidebar-logo {
-        font-family: 'Space Mono', monospace;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: white !important;
-        padding: 4px 0;
-    }
-    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+    /* P3K */
+    .p3k-box { border-radius: 14px; padding: 18px 20px; margin: 8px 0; border: 1px solid var(--card-border); }
+    .p3k-box h4 { margin: 0 0 8px; color: var(--text-color); }
+    .p3k-box p  { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text-color); }
 
-    hr { border: none; border-top: 1px solid rgba(128,128,128,0.25); margin: 16px 0; }
+    .feature-card { border-radius: 14px; padding: 16px; text-align: center; height: 160px; border: 1px solid var(--card-border); }
+    .quiz-box { border-radius: 16px; padding: 24px; margin-bottom: 14px; border: 1px solid var(--card-border); }
+    .quiz-q { margin: 0; font-size: 1.05rem; line-height: 1.5; font-weight: 600; color: var(--text-color); }
+    .member-card { border-radius: 14px; padding: 16px 20px; margin: 8px 0; display: flex; align-items: center; gap: 16px; border: 1px solid var(--card-border); }
+    .member-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; flex-shrink: 0; color: white; }
+    .guide-step { display: flex; align-items: flex-start; gap: 14px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--card-border); margin: 6px 0; }
+    .guide-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; color: white; }
+    .benefit-row { border-radius: 10px; padding: 10px 14px; margin: 6px 0; display: flex; align-items: center; gap: 10px; border: 1px solid var(--card-border); }
 
-    /* ===== QUIZ BUTTONS ===== */
-    .stButton > button {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 600;
-    }
-
-    /* ===== ADAPTIVE TEXT COLORS ===== */
-    /* Force readable text on colored backgrounds */
-    .safe-text-dark  { color: var(--text-strong) !important; }
-    .safe-text-light { color: #f1f5f9 !important; }
-
-    /* Hero stat cards adaptive */
-    .hero-stat {
-        text-align: center;
-        padding: 18px;
-        border-radius: 14px;
-        border: 1px solid rgba(128,128,128,0.2);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .hero-stat .stat-num {
-        font-size: 2rem;
-        font-weight: 800;
-    }
-    .hero-stat .stat-label {
-        font-size: 0.8rem;
-        margin-top: 4px;
-        opacity: 0.7;
-    }
-
-    /* Step cards for tumpahan */
-    .step-block {
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin: 8px 0;
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        border: 1px solid rgba(128,128,128,0.15);
-    }
-    .step-num {
-        width: 30px;
-        height: 30px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 0.82rem;
-        flex-shrink: 0;
-        color: white;
-    }
-    .step-title {
-        font-size: 0.88rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-weight: 700;
-        margin: 0 0 4px;
-    }
-    .step-content {
-        font-size: 0.88rem;
-        margin: 0;
-        line-height: 1.6;
-    }
-
-    /* P3K tab content */
-    .p3k-box {
-        border-radius: 14px;
-        padding: 18px 20px;
-        margin: 8px 0;
-        border: 1px solid rgba(128,128,128,0.15);
-    }
-    .p3k-box h4 { margin: 0 0 8px; }
-    .p3k-box p  { margin: 0; font-size: 0.9rem; line-height: 1.7; }
-
-    /* Feature preview cards */
-    .feature-card {
-        border-radius: 14px;
-        padding: 16px;
-        text-align: center;
-        height: 160px;
-        border: 1px solid rgba(128,128,128,0.15);
-    }
-
-    /* Warning / info banners always with strong contrast */
-    .banner-warning {
-        background: #fee2e2;
-        border-radius: 12px;
-        padding: 14px 18px;
-        font-size: 0.85rem;
-        color: #7f1d1d !important;
-        border: 1px solid #fecaca;
-    }
-    .banner-warning * { color: #7f1d1d !important; }
-    .banner-info {
-        background: #eff6ff;
-        border-radius: 12px;
-        padding: 14px 18px;
-        font-size: 0.85rem;
-        color: #1e3a8a !important;
-        border: 1px solid #bfdbfe;
-    }
-    .banner-info * { color: #1e3a8a !important; }
-    .banner-note {
-        background: #fffbeb;
-        border: 1px solid #fde68a;
-        border-radius: 12px;
-        padding: 14px 18px;
-        color: #78350f !important;
-    }
-    .banner-note * { color: #78350f !important; }
-
-    /* GHS badge */
-    .ghs-card {
-        border-radius: 14px;
-        padding: 16px;
-        text-align: center;
-        height: 130px;
-        border: 2px solid;
-    }
-
-    /* Danger badge strip */
-    .sifat-strip {
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin: 10px 0;
-        background: #fff1f2;
-        border: 1px solid #fecdd3;
-    }
-    .sifat-strip .label { font-size: 0.78rem; color: #be123c; font-weight: 700; text-transform: uppercase; }
-    .sifat-strip .value { margin: 6px 0 0; font-weight: 700; color: #be123c; font-size: 1rem; }
-
-    /* Quiz question box */
-    .quiz-box {
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 14px;
-        border: 1px solid rgba(128,128,128,0.2);
-    }
-    .quiz-q {
-        margin: 0;
-        font-size: 1.05rem;
-        line-height: 1.5;
-        font-weight: 600;
-    }
-
-    /* Member card */
-    .member-card {
-        border-radius: 14px;
-        padding: 16px 20px;
-        margin: 8px 0;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        border: 1px solid rgba(128,128,128,0.2);
-    }
-    .member-avatar {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 1.1rem;
-        flex-shrink: 0;
-        color: white;
-    }
-
-    /* Guide step */
-    .guide-step {
-        display: flex;
-        align-items: flex-start;
-        gap: 14px;
-        padding: 12px 16px;
-        border-radius: 12px;
-        border: 1px solid rgba(128,128,128,0.2);
-        margin: 6px 0;
-    }
-    .guide-num {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 0.85rem;
-        flex-shrink: 0;
-        color: white;
-    }
-
-    /* Benefit row */
-    .benefit-row {
-        border-radius: 10px;
-        padding: 10px 14px;
-        margin: 6px 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        border: 1px solid rgba(128,128,128,0.12);
-    }
-
+    /* Banner Tetap Punya Warna Khusus */
+    .banner-warning { background: rgba(254, 226, 226, 0.2); border: 1px solid #fecaca; border-radius: 12px; padding: 14px 18px; font-size: 0.85rem; color: #ef4444 !important; }
+    .banner-info { background: rgba(239, 246, 255, 0.2); border: 1px solid #bfdbfe; border-radius: 12px; padding: 14px 18px; font-size: 0.85rem; color: #3b82f6 !important; }
+    .banner-note { background: rgba(255, 251, 235, 0.2); border: 1px solid #fde68a; border-radius: 12px; padding: 14px 18px; color: #f59e0b !important; }
     </style>
     """, unsafe_allow_html=True)
 
