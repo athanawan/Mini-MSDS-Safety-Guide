@@ -560,7 +560,7 @@ def pasang_css():
 
 def tampil_sidebar():
     with st.sidebar:
-        st.markdown('<div class="sidebar-logo">⚗️ Mini MSDS & Safety Guide</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-logo">📋 Mini MSDS & Safety Guide</div>', unsafe_allow_html=True)
         st.markdown('<p style="font-size:0.75rem;color:#94a3b8!important;margin-top:2px;">v3.0 · Sistem Informasi Kimia</p>', unsafe_allow_html=True)
         st.divider()
         pilihan = st.radio(
@@ -690,7 +690,7 @@ def halaman_beranda():
     st.markdown("""
     <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:16px;
                 padding:24px 28px;color:white;text-align:center;margin-top:10px;">
-      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">⚗️ <strong>Mini MSDS & Safety Guide</strong></p>
+      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">📋 <strong>Mini MSDS & Safety Guide</strong></p>
       <p style="font-size:0.82rem;opacity:0.8;margin:0;color:white;line-height:1.6;">
         Website ini dikembangkan sebagai proyek Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         untuk membantu akses informasi keselamatan bahan kimia secara cepat, praktis, dan interaktif.<br>
