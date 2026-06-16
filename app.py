@@ -342,7 +342,7 @@ def pasang_css():
 def tampil_sidebar():
     with st.sidebar:
         st.markdown('<div class="sidebar-logo">📋 Mini MSDS & Safety Guide</div>', unsafe_allow_html=True)
-        st.markdown('<p style="font-size:0.75rem;color:#94a3b8!important;margin-top:2px;">v2.0 · Sistem Informasi Kimia</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:0.75rem;color:#94a3b8!important;margin-top:2px;">v3.0 · Sistem Informasi Kimia</p>', unsafe_allow_html=True)
         st.divider()
         pilihan = st.radio(
             "📌 Navigasi",
