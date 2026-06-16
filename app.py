@@ -673,14 +673,16 @@ def halaman_p3k():
 
     for tab, (ikon, judul, konten, warna_bg, warna) in zip(tab_p3k, isi_tab):
         with tab:
+            teks_konten = konten if konten else "Segera hubungi tenaga medis profesional untuk penanganan lebih lanjut."
             st.markdown(f"""<div style="background:{warna_bg};border:1px solid {warna}30;border-radius:14px;padding:18px 20px;margin:8px 0;">
               <h4 style="color:{warna};margin:0 0 8px;">{ikon} {judul}</h4>
-              <p style="margin:0;font-size:0.9rem;color:#334155;line-height:1.7;">{konten}</p>
+              <p style="margin:0;font-size:0.9rem;color:#1e293b;line-height:1.7;">{teks_konten}</p>
             </div>""", unsafe_allow_html=True)
 
+    catatan_p3k = data_p3k["catatan"] if data_p3k["catatan"] else "Segera cari bantuan medis profesional jika gejala berlanjut atau kondisi korban memburuk. Jangan lupa bawa informasi bahan kimia kepada petugas medis."
     st.markdown(f"""
     <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 18px;margin-top:10px;">
-      <strong>📌 Catatan Umum:</strong> {data_p3k["catatan"]}
+      <strong style="color:#92400e;">📌 Catatan Umum:</strong> <span style="color:#78350f;">{catatan_p3k}</span>
     </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -853,7 +855,7 @@ def halaman_tentang():
         ("A", "ATHA MAHARDIKA NAWAN",            "Analisis Kimia", "#1d4ed8", "#dbeafe"),
         ("M", "MANAHEL ARIELLA PERTA",           "Analisis Kimia", "#7c3aed", "#f3e8ff"),
         ("N", "NAILA PUTRI ZAHRA",               "Analisis Kimia", "#0891b2", "#e0f2fe"),
-        ("S", "SALWAA SAFAANAH",                  "Analisis Kimia", "#16a34a", "#dcfce7"),
+        ("S", "SALWA SAFAANAH",                  "Analisis Kimia", "#16a34a", "#dcfce7"),
     ]
 
     for huruf, nama, prodi, warna, warna_bg in anggota_tim:
@@ -876,19 +878,19 @@ def halaman_tentang():
         st.markdown("""
         <div class="chem-card">
           <h4 style="margin:0 0 10px;color:#1e3a5f;">🏛️ Institusi</h4>
-          <p style="margin:4px 0;"><strong>Politeknik AKA Bogor</strong></p>
-          <p style="margin:4px 0;font-size:0.85rem;color:#64748b;">Akademi Kimia Analis Bogor</p>
-          <p style="margin:4px 0;font-size:0.85rem;color:#64748b;">Kementerian Perindustrian RI</p>
-          <p style="margin:4px 0;font-size:0.85rem;color:#64748b;">📍 Bogor, Jawa Barat</p>
+          <p style="margin:4px 0;color:#1e293b;"><strong style="color:#1e293b;">Politeknik AKA Bogor</strong></p>
+          <p style="margin:4px 0;font-size:0.85rem;color:#475569;">Akademi Kimia Analis Bogor</p>
+          <p style="margin:4px 0;font-size:0.85rem;color:#475569;">Kementerian Perindustrian RI</p>
+          <p style="margin:4px 0;font-size:0.85rem;color:#475569;">📍 Bogor, Jawa Barat</p>
         </div>""", unsafe_allow_html=True)
     with kol2:
         st.markdown("""
         <div class="chem-card">
           <h4 style="margin:0 0 10px;color:#1e3a5f;">📚 Mata Kuliah</h4>
-          <p style="margin:4px 0;"><strong>Logika dan Pemrograman Komputer</strong></p>
-          <p style="margin:4px 0;font-size:0.85rem;color:#64748b;">Program Studi: D3 Analisis Kimia</p>
-          <p style="margin:4px 0;font-size:0.85rem;color:#64748b;">Platform: Python + Streamlit</p>
-          <p style="margin:4px 0;font-size:0.85rem;color:#64748b;">🗓️ Tahun Akademik 2025/2026</p>
+          <p style="margin:4px 0;color:#1e293b;"><strong style="color:#1e293b;">Logika dan Pemrograman Komputer</strong></p>
+          <p style="margin:4px 0;font-size:0.85rem;color:#475569;">Program Studi: D3 Analisis Kimia</p>
+          <p style="margin:4px 0;font-size:0.85rem;color:#475569;">Platform: Python + Streamlit</p>
+          <p style="margin:4px 0;font-size:0.85rem;color:#475569;">🗓️ Tahun Akademik 2025/2026</p>
         </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
