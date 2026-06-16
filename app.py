@@ -4,7 +4,7 @@ import random
 
 st.set_page_config(
     page_title=" MSDS Mini | Sistem Informasi Bahan Kimia",
-    page_icon="⚗️",
+    page_icon="📋",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -341,12 +341,12 @@ def pasang_css():
 
 def tampil_sidebar():
     with st.sidebar:
-        st.markdown('<div class="sidebar-logo">⚗️ Mini MSDS & Safety Guide</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-logo">📋 Mini MSDS & Safety Guide</div>', unsafe_allow_html=True)
         st.markdown('<p style="font-size:0.75rem;color:#94a3b8!important;margin-top:2px;">v2.0 · Sistem Informasi Kimia</p>', unsafe_allow_html=True)
         st.divider()
         pilihan = st.radio(
             "📌 Navigasi",
-            options=["🏠 Beranda", "📋 Mini MSDS", "🚨 Pengendalian Tumpahan", "🩺 Pertolongan Pertama", "🧠 Kuis Kimia", "👥 Tentang Kami"],
+            options=["🏠 Beranda", "📋 Mini MSDS", "🚨 Pengendalian Tumpahan", "⛑️ Pertolongan Pertama", "🧠 Kuis Kimia", "👥 Tentang Kami"],
             label_visibility="collapsed"
         )
         st.divider()
@@ -363,7 +363,7 @@ def halaman_beranda():
       <div style="position:absolute;bottom:-60px;left:60%;width:150px;height:150px;
                   background:rgba(255,255,255,0.04);border-radius:50%;"></div>
       <p style="font-size:0.85rem;letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin:0 0 8px;">
-        ⚗️ Platform Informasi Kimia Lab
+        📋 Platform Informasi Kimia Lab
       </p>
       <h1 style="font-size:2.6rem;font-weight:800;margin:0 0 10px;line-height:1.2;color:white;">
         Mini MSDS & Safety Guide
@@ -374,7 +374,7 @@ def halaman_beranda():
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">📊 Mini MSDS</span>
         <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🚨 Prosedur Darurat</span>
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🩺 Pertolongan Pertama</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">⛑️ Pertolongan Pertama</span>
         <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.82rem;backdrop-filter:blur(4px);">🧠 Kuis Interaktif</span>
       </div>
     </div>
@@ -442,7 +442,7 @@ def halaman_beranda():
          "Database 74 bahan kimia lengkap dengan rumus, sifat fisik, wujud, warna, bau & simbol GHS."),
         ("🚨", "Pengendalian Tumpahan", "#fee2e2", "#dc2626",
          "Prosedur langkah demi langkah penanganan tumpahan bahan kimia beserta APD yang diperlukan."),
-        ("🩺", "Pertolongan Pertama",  "#d1fae5", "#059669",
+        ("⛑️", "Pertolongan Pertama",  "#d1fae5", "#059669",
          "Panduan P3K detail per jalur paparan: kulit, mata, terhirup, dan tertelan."),
         ("🧠", "Kuis Interaktif",       "#f3e8ff", "#7c3aed",
          f"{len(DAFTAR_SOAL)} soal pilihan ganda seputar sifat, bahaya, APD, dan prosedur kimia lab."),
@@ -462,7 +462,7 @@ def halaman_beranda():
         ("1", "🧭 Navigasi Sidebar",   "Pilih fitur yang diinginkan melalui menu di sebelah kiri layar.", "#1e3a5f"),
         ("2", "🔍 Mini MSDS",          "Pilih nama bahan kimia atau cari dengan rumus kimia untuk melihat informasi lengkap, sifat bahaya, dan simbol GHS.", "#0f4c75"),
         ("3", "🚨 Tumpahan",           "Pilih bahan kimia yang terlibat insiden untuk mendapatkan prosedur penanganan tumpahan yang detail.", "#dc2626"),
-        ("4", "🩺 Pertolongan Pertama","Pilih bahan kimia untuk panduan P3K berdasarkan jalur paparan: kulit, mata, terhirup, dan tertelan.", "#059669"),
+        ("4", "⛑️ Pertolongan Pertama","Pilih bahan kimia untuk panduan P3K berdasarkan jalur paparan: kulit, mata, terhirup, dan tertelan.", "#059669"),
         ("5", "🧠 Kuis Kimia",         "Uji pemahaman kamu tentang keselamatan kimia lab melalui 15 soal interaktif yang beragam.", "#7c3aed"),
     ]
     for nomor, judul, isi, warna in langkah_panduan:
@@ -479,7 +479,7 @@ def halaman_beranda():
     st.markdown("""
     <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:16px;
                 padding:24px 28px;color:white;text-align:center;margin-top:10px;">
-      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">⚗️ <strong>Mini MSDS & Safety Guide</strong></p>
+      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">📋 <strong>Mini MSDS & Safety Guide</strong></p>
       <p style="font-size:0.82rem;opacity:0.8;margin:0;color:white;line-height:1.6;">
         Website ini dikembangkan sebagai proyek Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         untuk membantu akses informasi keselamatan bahan kimia secara cepat, praktis, dan interaktif.<br>
@@ -578,7 +578,7 @@ def halaman_tumpahan():
         st.warning("Bahan kimia tidak ditemukan. Coba kata kunci lain.")
         return
 
-    label_terpilih  = st.selectbox("⚗️ Pilih Bahan Kimia yang Terlibat Insiden:", pilihan_dropdown, key="sel_tumpahan")
+    label_terpilih  = st.selectbox("📋 Pilih Bahan Kimia yang Terlibat Insiden:", pilihan_dropdown, key="sel_tumpahan")
     nama_terpilih   = label_terpilih.split("  (")[0]
     bahan           = next(b for b in daftar_bahan if b["nama_senyawa"] == nama_terpilih)
 
@@ -625,12 +625,12 @@ def halaman_tumpahan():
     <div style="background:#fee2e2;border-radius:12px;padding:14px 18px;font-size:0.85rem;color:#7f1d1d;">
       <strong>🚑 PENTING:</strong> Untuk kasus tumpahan besar atau bahan berbahaya tinggi, segera hubungi 
       petugas keselamatan laboratorium dan IGD / Nomor Darurat <strong>119</strong>. Gunakan fitur 
-      <strong>🩺 Pertolongan Pertama</strong> di menu kiri untuk panduan P3K jika ada korban paparan.
+      <strong>⛑️ Pertolongan Pertama</strong> di menu kiri untuk panduan P3K jika ada korban paparan.
     </div>""", unsafe_allow_html=True)
 
 
 def halaman_p3k():
-    st.markdown("## 🩺 Pertolongan Pertama (P3K)")
+    st.markdown("## ⛑️ Pertolongan Pertama (P3K)")
     st.markdown("Panduan pertolongan pertama berdasarkan jalur paparan bahan kimia: kulit, mata, terhirup, dan tertelan.")
 
     kata_cari = st.text_input("🔍 Cari nama atau rumus kimia...", placeholder="Contoh: Asam, Etanol, H2SO4, NaCl...", key="cari_p3k")
@@ -641,7 +641,7 @@ def halaman_p3k():
         st.warning("Bahan kimia tidak ditemukan. Coba kata kunci lain.")
         return
 
-    label_terpilih = st.selectbox("⚗️ Pilih Bahan Kimia yang Terlibat:", pilihan_dropdown, key="sel_p3k")
+    label_terpilih = st.selectbox("📋 Pilih Bahan Kimia yang Terlibat:", pilihan_dropdown, key="sel_p3k")
     nama_terpilih  = label_terpilih.split("  (")[0]
     bahan          = next(b for b in daftar_bahan if b["nama_senyawa"] == nama_terpilih)
 
@@ -652,14 +652,14 @@ def halaman_p3k():
     st.markdown(f"""
     <div style="background:linear-gradient(135deg,{wc}22,{wc}0a);border-left:5px solid {wc};
                 border-radius:0 14px 14px 0;padding:16px 20px;margin:12px 0;">
-      <h3 style="margin:0;color:{wc};">🩺 P3K: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
+      <h3 style="margin:0;color:{wc};">⛑️ P3K: {bahan['nama_senyawa']} ({bahan['rumus_kimia']})</h3>
       <p style="margin:4px 0 0;color:#64748b;font-size:0.88rem;">Sifat Bahaya: <strong style="color:{wc};">{bahan['sifat']}</strong></p>
     </div>""", unsafe_allow_html=True)
 
     html_badge = " ".join(f'<span style="background:{TABEL_GHS[g]["bg"]};color:{TABEL_GHS[g]["color"]};padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700;">{TABEL_GHS[g]["emoji"]} {TABEL_GHS[g]["label"]}</span>' for g in simbol_ghs)
     st.markdown(f"<div style='margin:8px 0;'>{html_badge}</div>", unsafe_allow_html=True)
 
-    st.markdown("### 🩺 Tindakan Pertolongan Pertama")
+    st.markdown("### ⛑️ Tindakan Pertolongan Pertama")
     st.markdown("Pilih jalur paparan yang terjadi:")
 
     data_p3k  = buat_panduan_p3k(bahan["nama_senyawa"], bahan["sifat"], bahan["pertolongan_pertama"])
@@ -835,7 +835,7 @@ def halaman_tentang():
 
     st.markdown("""
     <div style="background:linear-gradient(135deg,#1e3a5f,#0f4c75);color:white;border-radius:18px;padding:28px 32px;margin-bottom:24px;">
-      <h3 style="color:white;margin:0 0 8px;">⚗️ Mini MSDS & Safety Guide</h3>
+      <h3 style="color:white;margin:0 0 8px;">📋 Mini MSDS & Safety Guide</h3>
       <p style="opacity:0.9;margin:0 0 12px;color:white;">
         Proyek ini dikembangkan sebagai tugas akhir Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         oleh mahasiswa Program Studi Analisis Kimia, Politeknik AKA Bogor.
@@ -895,7 +895,7 @@ def halaman_tentang():
     st.markdown("""
     <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:16px;
                 padding:22px 28px;color:white;text-align:center;">
-      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">⚗️ <strong>Mini MSDS & Safety Guide v2.0</strong></p>
+      <p style="font-size:0.95rem;margin:0 0 6px;color:white;">📋 <strong>Mini MSDS & Safety Guide v2.0</strong></p>
       <p style="font-size:0.82rem;opacity:0.8;margin:0;color:white;line-height:1.7;">
         Website ini dikembangkan sebagai proyek Mata Kuliah <strong>Logika dan Pemrograman Komputer</strong>
         untuk membantu akses informasi keselamatan bahan kimia secara cepat, praktis, dan interaktif.<br>
