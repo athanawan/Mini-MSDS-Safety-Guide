@@ -250,6 +250,28 @@ def pasang_css():
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
+    /* ── Background utama dengan gradasi elegan ── */
+    .stApp {
+        background: linear-gradient(135deg,
+            #f0f4ff 0%,
+            #f8f6ff 25%,
+            #fff8f5 50%,
+            #f0f9ff 75%,
+            #f5fff8 100%
+        ) !important;
+        background-attachment: fixed !important;
+    }
+
+    /* Subtle radial glow overlay */
+    .main {
+        background:
+            radial-gradient(circle at 20% 20%, rgba(99,102,241,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 10%, rgba(14,165,233,0.05) 0%, transparent 40%),
+            radial-gradient(circle at 60% 80%, rgba(168,85,247,0.04) 0%, transparent 45%),
+            radial-gradient(circle at 10% 80%, rgba(16,185,129,0.04) 0%, transparent 40%);
+        background-attachment: fixed;
+    }
+
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
         border-right: 1px solid #334155;
