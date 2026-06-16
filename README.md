@@ -1,4 +1,4 @@
-# ⚗️ ChemAssist Lab — Sistem Informasi Keselamatan Bahan Kimia
+# Mini MSDS 📋 — Sistem Informasi Keselamatan Bahan Kimia
 
 > Proyek Mata Kuliah Logika dan Pemrograman Komputer  
 > Kelompok 2 · Program Studi Analisis Kimia · Politeknik AKA Bogor
@@ -7,10 +7,10 @@
 
 ## Deskripsi
 
-**ChemAssist Lab** adalah platform web interaktif berbasis Python (Streamlit) yang menyediakan:
+**MSDS Mini** adalah platform web interaktif berbasis Python (Streamlit) yang menyediakan:
 - 📋 **Mini MSDS** — Informasi lengkap 74 bahan kimia lab (sifat fisik, GHS, LGK)
 - 🚨 **Pengendalian Tumpahan** — Prosedur darurat + P3K detail per jalur paparan
-- ⚖️ **Kalkulator Berat Molekul** — Hitung BM berdasarkan input atom
+- ⛑️ **Pertolongan Pertama** — Panduan P3K detail per jalur paparan
 - 🧠 **Kuis Interaktif** — 15 soal seputar keselamatan kimia laboratorium
 - 👥 **Tentang Kami** — Profil tim pengembang
 
