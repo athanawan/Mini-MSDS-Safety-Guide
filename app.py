@@ -552,7 +552,7 @@ def halaman_msds():
         with kolom_ghs[i % len(kolom_ghs)]:
             info = TABEL_GHS[kode_ghs]
             st.markdown(f"""<div style="background:{info['bg']};border:2px solid {info['color']}40;
-                            border-radius:14px;padding:16px;text-align:center;height:130px;">
+                            border-radius:14px;padding:16px;text-align:center;min-height:130px;">
               <div style="font-size:2rem;">{info['emoji']}</div>
               <strong style="color:{info['color']};font-size:0.88rem;">{info['label']}</strong>
               <p style="font-size:0.76rem;color:#64748b;margin:4px 0 0;">{info['desc']}</p>
